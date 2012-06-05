@@ -12,6 +12,7 @@ set(pim_HEADERS
 	includes/main.hpp
 	includes/calendarmainwidget.hpp
 	includes/instantmainwidget.hpp
+	includes/rssmainwidget.hpp
 	includes/ircmainwidget.hpp
 	includes/mailmainwidget.hpp
 	includes/mainwindow.hpp
@@ -26,6 +27,7 @@ set(pim_SOURCES
 	src/main.cpp
 	src/calendarmainwidget.cpp
 	src/instantmainwidget.cpp
+	src/rssmainwidget.cpp
 	src/ircmainwidget.cpp
 	src/mailmainwidget.cpp
 	src/mainwindow.cpp
@@ -46,6 +48,7 @@ set(pim_MOC_HEADERS
 	includes/todomainwidget.hpp
 	includes/loggingmainwidget.hpp
 	includes/contactsmainwidget.hpp
+	includes/rssmainwidget.hpp
 )
 
 set(pim_UIS 
@@ -58,6 +61,7 @@ set(pim_UIS
 	ui/todomainwidget.ui
 	ui/loggingmainwidget.ui
 	ui/contactsmainwidget.ui
+	ui/rssmainwidget.ui
 )
 
 set(pim_RESOURCES
