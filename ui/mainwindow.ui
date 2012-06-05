@@ -21,50 +21,8 @@
        <enum>QTabWidget::West</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>-1</number>
       </property>
-      <widget class="QWidget" name="summary">
-       <attribute name="title">
-        <string>&amp;Summay</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="mail">
-       <attribute name="title">
-        <string>&amp;Mail</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_2"/>
-      </widget>
-      <widget class="QWidget" name="messanger">
-       <attribute name="title">
-        <string>M&amp;essanger</string>
-       </attribute>
-       <layout class="QHBoxLayout" name="horizontalLayout_4"/>
-      </widget>
-      <widget class="QWidget" name="irc">
-       <attribute name="title">
-        <string>&amp;IRC</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="calendar">
-       <attribute name="title">
-        <string>&amp;Calendar</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="todo">
-       <attribute name="title">
-        <string>&amp;Todo</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="journal">
-       <attribute name="title">
-        <string>&amp;Journal</string>
-       </attribute>
-      </widget>
-      <widget class="QWidget" name="logger">
-       <attribute name="title">
-        <string>Logger</string>
-       </attribute>
-      </widget>
      </widget>
     </item>
    </layout>

@@ -10,18 +10,44 @@ include(${QT_USE_FILE})
 
 set(pim_HEADERS 
 	includes/main.hpp
+	includes/calendarmainwidget.hpp
+	includes/instantmainwidget.hpp
+	includes/ircmainwidget.hpp
+	includes/mailmainwidget.hpp
+	includes/mainwindow.hpp
+	includes/summarymainwidget.hpp
+	includes/todomainwidget.hpp
+	includes/loggingmainwidget.hpp
+	includes/contactsmainwidget.hpp
 )
 
 set(pim_SOURCES 
 	src/main.cpp
+	src/calendarmainwidget.cpp
+	src/instantmainwidget.cpp
+	src/ircmainwidget.cpp
+	src/mailmainwidget.cpp
+	src/mainwindow.cpp
+	src/summarymainwidget.cpp
+	src/todomainwidget.cpp
+	src/loggingmainwidget.cpp
+	src/contactsmainwidget.cpp
 )
 
 set(pim_MOC_HEADERS 
-	includes/main.hpp
+	${pim_HEADERS}
 )
 
 set(pim_UIS 
+	ui/calendarmainwidget.ui
+	ui/instantmainwidget.ui
+	ui/ircmainwidget.ui
+	ui/mailmainwidget.ui
 	ui/mainwindow.ui
+	ui/summarymainwidget.ui
+	ui/todomainwidget.ui
+	ui/loggingmainwidget.ui
+	ui/contactsmainwidget.ui
 )
 
 SET(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
