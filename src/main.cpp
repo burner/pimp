@@ -15,7 +15,7 @@ void MainWindow::getAll() {
 
 int main(int argc, char** argv) {
 	QApplication app(argc, argv);
-	MainWindow* mainWindow = new MainWindow;
+	auto mainWindow = new MainWindow;
 	mainWindow->show();
 
 	return app.exec();
