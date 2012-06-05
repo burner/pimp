@@ -8,8 +8,15 @@ class LoggingMainWidget : public QWidget {
 	public:
 		LoggingMainWidget(QWidget* parent = NULL);
 
+		static LoggingMainWidget* getInstance();
+		static void loggingFunction(QtMsgType type, const char* msg);
+
 	private:
+		static LoggingMainWidget* instance;
 		Ui::LoggingMainWidget ui;
+
+	signals:
+		void messageEmit(const QString& msg);
 
 };
 #endif

@@ -28,5 +28,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 }
 
 void MainWindow::getAll() {
+	qDebug()<<"hello";
 	return;
 }
