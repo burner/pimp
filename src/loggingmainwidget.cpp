@@ -14,13 +14,7 @@ LoggingMainWidget::LoggingMainWidget(QWidget* parent) : QWidget(parent) {
 		ui.loggingTextBox, SLOT(appendPlainText(const QString&)));
 }
 
-
 void LoggingMainWidget::loggingFunction(QtMsgType type, const char* msg) {
-	/*QString str = QString("[%s %s] %s").arg(
-		QString(type == QtDebugMsg ? "Debug" :
-		type == QtWarningMsg ? "Warning" : type == QtCriticalMsg ? "Critical" :
-		type == QtFatalMsg ? "Fatal" : "Unknown"),
-		QTime::currentTime().toString(), QString(msg));*/
 	QString str;
 	switch(type) {
 		case QtDebugMsg:
