@@ -16,11 +16,29 @@ LoggingMainWidget::LoggingMainWidget(QWidget* parent) : QWidget(parent) {
 
 
 void LoggingMainWidget::loggingFunction(QtMsgType type, const char* msg) {
-	QString str = QString("[%7s %9s] %s").arg(type == QtDebugMsg ? "Debug" :
+	/*QString str = QString("[%s %s] %s").arg(
+		QString(type == QtDebugMsg ? "Debug" :
 		type == QtWarningMsg ? "Warning" : type == QtCriticalMsg ? "Critical" :
-		type == QtFatalMsg ? "Fatal" : "Unknown",
-		QTime::currentTime().toString(), msg);
-	printf("here\n");
+		type == QtFatalMsg ? "Fatal" : "Unknown"),
+		QTime::currentTime().toString(), QString(msg));*/
+	QString str;
+	switch(type) {
+		case QtDebugMsg:
+			str = QString("[   Debug: ");
+			break;
+		case QtWarningMsg:
+			str = QString("[ Warning: ");
+			break;
+		case QtCriticalMsg:
+			str = QString("[Critical: ");
+			break;
+		case QtFatalMsg:
+			str = QString("[   Fatal:");
+			break;
+	}
+	str.append(QTime::currentTime().toString());
+	str.append(" ");
+	str.append(msg);
 	
 	emit instance->messageEmit(str);
 }

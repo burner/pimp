@@ -19,6 +19,7 @@ set(pim_HEADERS
 	includes/todomainwidget.hpp
 	includes/loggingmainwidget.hpp
 	includes/contactsmainwidget.hpp
+	includes/debug.hpp
 )
 
 set(pim_SOURCES 
@@ -32,10 +33,19 @@ set(pim_SOURCES
 	src/todomainwidget.cpp
 	src/loggingmainwidget.cpp
 	src/contactsmainwidget.cpp
+	src/debug.cpp
 )
 
 set(pim_MOC_HEADERS 
-	${pim_HEADERS}
+	includes/calendarmainwidget.hpp
+	includes/instantmainwidget.hpp
+	includes/ircmainwidget.hpp
+	includes/mailmainwidget.hpp
+	includes/mainwindow.hpp
+	includes/summarymainwidget.hpp
+	includes/todomainwidget.hpp
+	includes/loggingmainwidget.hpp
+	includes/contactsmainwidget.hpp
 )
 
 set(pim_UIS 
@@ -52,10 +62,10 @@ set(pim_UIS
 
 SET(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
 
-QT4_WRAP_CPP(pim_MOC ${pim_HEADERS})
+QT4_WRAP_CPP(pim_MOC ${pim_MOC_HEADERS})
 QT4_WRAP_UI(pim_UIS_H ${pim_UIS})
 QT4_ADD_RESOURCES(pim_RESOURCES_CPP ${pim_RESOURCES})
-QT4_WRAP_CPP(pim_MOC_SOURCES ${pim_MOC_HEADERS})
+#QT4_WRAP_CPP(pim_MOC_SOURCES ${pim_MOC_HEADERS})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/includes)
 

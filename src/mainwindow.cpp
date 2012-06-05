@@ -1,5 +1,3 @@
-#include <QDebug>
-
 #include <main.hpp>
 #include <mainwindow.hpp>
 #include <mailmainwidget.hpp>
@@ -10,6 +8,7 @@
 #include <calendarmainwidget.hpp>
 #include <contactsmainwidget.hpp>
 #include <loggingmainwidget.hpp>
+#include <debug.hpp>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 	ui.setupUi(this);
@@ -28,6 +27,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 }
 
 void MainWindow::getAll() {
-	qDebug()<<"hello";
+	debug()<<"getAll stub";
 	return;
 }
