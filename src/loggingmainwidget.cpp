@@ -1,4 +1,6 @@
 #include <loggingmainwidget.hpp>
+#include <stdio.h>
+#include <QTime>
 
 LoggingMainWidget* LoggingMainWidget::instance;
 
@@ -14,6 +16,11 @@ LoggingMainWidget::LoggingMainWidget(QWidget* parent) : QWidget(parent) {
 
 
 void LoggingMainWidget::loggingFunction(QtMsgType type, const char* msg) {
-	QString str(msg);
+	QString str = QString("[%7s %9s] %s").arg(type == QtDebugMsg ? "Debug" :
+		type == QtWarningMsg ? "Warning" : type == QtCriticalMsg ? "Critical" :
+		type == QtFatalMsg ? "Fatal" : "Unknown",
+		QTime::currentTime().toString(), msg);
+	printf("here\n");
+	
 	emit instance->messageEmit(str);
 }
