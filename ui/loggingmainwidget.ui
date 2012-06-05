@@ -16,6 +16,9 @@
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QDockWidget" name="dockWidget">
+     <property name="features">
+      <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+     </property>
      <widget class="QWidget" name="dockWidgetContents">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>

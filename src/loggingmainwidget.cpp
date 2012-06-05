@@ -1,5 +1,5 @@
 #include <loggingmainwidget.hpp>
-#include <stdio.h>
+
 #include <QTime>
 
 LoggingMainWidget* LoggingMainWidget::instance;

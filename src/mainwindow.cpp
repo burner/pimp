@@ -1,15 +1,15 @@
-#include <main.hpp>
-#include <mainwindow.hpp>
-#include <mailmainwidget.hpp>
-#include <summarymainwidget.hpp>
-#include <instantmainwidget.hpp>
-#include <ircmainwidget.hpp>
-#include <todomainwidget.hpp>
 #include <calendarmainwidget.hpp>
 #include <contactsmainwidget.hpp>
-#include <loggingmainwidget.hpp>
-#include <rssmainwidget.hpp>
 #include <debug.hpp>
+#include <instantmainwidget.hpp>
+#include <ircmainwidget.hpp>
+#include <loggingmainwidget.hpp>
+#include <mailmainwidget.hpp>
+#include <main.hpp>
+#include <mainwindow.hpp>
+#include <rssmainwidget.hpp>
+#include <summarymainwidget.hpp>
+#include <todomainwidget.hpp>
 
 #include <QIcon>
 
