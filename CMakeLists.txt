@@ -60,6 +60,10 @@ set(pim_UIS
 	ui/contactsmainwidget.ui
 )
 
+set(pim_RESOURCES
+	resources/icons.qrc
+)
+
 SET(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
 
 QT4_WRAP_CPP(pim_MOC ${pim_MOC_HEADERS})
