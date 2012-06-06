@@ -2,8 +2,8 @@
 #include <debug.hpp>
 
 bool initDB() {
-	QSqlDatabase db = QSqlDatabase::addDatabase("RSSDATABASE");
-	db.setDatabaseName(":rssmemory:");
+	QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+	db.setDatabaseName("rssmemory.sqlite");
 
 	if(!db.open()) {
 		critical()<<db.lastError().text();
@@ -18,14 +18,14 @@ bool initDB() {
 
 	QSqlQuery q;
     if(!q.exec(QLatin1String(
-			"create table feeds(id integer primary key, title varchar, url varchar)"))) {
+			"create table feeds(id integer primary key, title varchar, url varchar, unread integer)"))) {
 		critical()<<q.lastError().text();
 		return false;
 	}
 
     if(!q.exec(QLatin1String(
-			"create table feedentries(id integer primary key, title varchar, link varchar ")
-			+ QLatin1String("pubData varchar, description varchar"))) {
+			"create table feedentries(id integer primary key, title varchar, link varchar, ")
+			+ QLatin1String("pubData varchar, description varchar)"))) {
 		critical()<<q.lastError().text();
 		return false;
 	}

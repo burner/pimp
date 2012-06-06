@@ -25,9 +25,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 	ui.tabWidget->addTab(new ContactsMainWidget(), QIcon(":/icons/people"), tr("C&ontacts"));
 	ui.tabWidget->addTab(new InstantMainWidget(), QIcon(":/icons/hands"), tr("&Instant"));
 	ui.tabWidget->addTab(new IrcMainWidget(), QIcon(":/icons/trash"), tr("I&rc"));
-	ui.tabWidget->addTab(new RssMainWidget(), QIcon(":/icons/rss"), tr("&RSS"));
+	auto rssWidget = new RssMainWidget(this);
+	ui.tabWidget->addTab(rssWidget, QIcon(":/icons/rss"), tr("&RSS"));
 	ui.tabWidget->addTab(new TodoMainWidget(), QIcon(":/icons/wrench"), tr("&Todo"));
 	ui.tabWidget->addTab(new LoggingMainWidget(), QIcon(":/icons/dog"), tr("&Logggin"));
+	rssWidget->init();
 }
 
 void MainWindow::getAll() {
