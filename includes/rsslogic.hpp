@@ -1,0 +1,3 @@
+#include <QtSql>
+
+bool initDB();

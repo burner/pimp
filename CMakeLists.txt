@@ -21,6 +21,7 @@ set(pim_HEADERS
 	includes/loggingmainwidget.hpp
 	includes/contactsmainwidget.hpp
 	includes/debug.hpp
+	includes/rsslogic.hpp
 )
 
 set(pim_SOURCES 
@@ -36,6 +37,7 @@ set(pim_SOURCES
 	src/loggingmainwidget.cpp
 	src/contactsmainwidget.cpp
 	src/debug.cpp
+	src/rsslogic.cpp
 )
 
 set(pim_MOC_HEADERS 
@@ -68,7 +70,7 @@ set(pim_RESOURCES
 	resources/icons.qrc
 )
 
-SET(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
+set(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
 
 QT4_WRAP_CPP(pim_MOC ${pim_MOC_HEADERS})
 QT4_WRAP_UI(pim_UIS_H ${pim_UIS})
@@ -88,4 +90,4 @@ add_executable(pim
 	${pim_HEADERS}
 )
 
-target_link_libraries(pim ${QT_LIBRARIES})
+target_link_libraries(pim ${QT_LIBRARIES} mrss)
