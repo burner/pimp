@@ -13,8 +13,11 @@ class RssMainWidget : public QWidget {
 
 	private:
 		Ui::RssMainWidget ui;
-		QSqlRelationalTableModel *feedModel;
+		QSqlDatabase db;
+		QSqlTableModel *feedModel;
 		QSqlRelationalTableModel *feedEntryModel;
+		bool initDB(QSqlDatabase&);
+		bool addFeed(QSqlQuery&, const QString&, const QString&);
 
 	private slots:
 		void newFeed();

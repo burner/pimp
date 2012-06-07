@@ -21,7 +21,6 @@ set(pim_HEADERS
 	includes/loggingmainwidget.hpp
 	includes/contactsmainwidget.hpp
 	includes/debug.hpp
-	includes/rsslogic.hpp
 	includes/newfeeddialog.hpp
 )
 
@@ -38,7 +37,6 @@ set(pim_SOURCES
 	src/loggingmainwidget.cpp
 	src/contactsmainwidget.cpp
 	src/debug.cpp
-	src/rsslogic.cpp
 	src/newfeeddialog.cpp
 )
 
