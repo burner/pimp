@@ -2,6 +2,7 @@
 #define RSSMAINWIDGET
 
 #include <QWidget>
+#include <QtSql>
 #include <ui_rssmainwidget.h>
 
 class RssMainWidget : public QWidget {
@@ -12,6 +13,8 @@ class RssMainWidget : public QWidget {
 
 	private:
 		Ui::RssMainWidget ui;
+		QSqlRelationalTableModel *feedModel;
+		QSqlRelationalTableModel *feedEntryModel;
 
 	private slots:
 		void newFeed();

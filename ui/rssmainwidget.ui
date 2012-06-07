@@ -43,26 +43,19 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QListView" name="feedView">
-         <property name="maximumSize">
-          <size>
-           <width>256</width>
-           <height>16777215</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QTableView" name="feedView"/>
        </item>
        <item>
         <widget class="QPushButton" name="newFeedButton">
          <property name="text">
-          <string>New Feed</string>
+          <string>&amp;New Feed</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="removeFeedButton">
          <property name="text">
-          <string>Remove Feed</string>
+          <string>&amp;Remove Feed</string>
          </property>
         </widget>
        </item>
@@ -71,14 +64,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QListView" name="subjectsView">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>128</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QTableView" name="feedEntryView"/>
        </item>
        <item>
         <widget class="QWebView" name="feedDisplay">

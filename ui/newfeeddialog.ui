@@ -84,6 +84,8 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>feedNameLineEdit</tabstop>
+  <tabstop>feedUrlLineEdit</tabstop>
   <tabstop>okButton</tabstop>
   <tabstop>cancelButton</tabstop>
  </tabstops>
