@@ -15,12 +15,15 @@ class RssMainWidget : public QWidget {
 		Ui::RssMainWidget ui;
 		QSqlDatabase db;
 		QSqlTableModel *feedModel;
-		QSqlRelationalTableModel *feedEntryModel;
+		QSqlTableModel *feedEntryModel;
 		bool initDB(QSqlDatabase&);
 		bool addFeed(QSqlQuery&, const QString&, const QString&);
+		void getFeed(const QString&, const int);
 
 	private slots:
 		void newFeed();
+		void onRemoveClick();
+		void getFeeds();
 
 	public slots:
 		void insertNewFeed(const QString, const QString);
