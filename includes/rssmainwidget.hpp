@@ -13,5 +13,11 @@ class RssMainWidget : public QWidget {
 	private:
 		Ui::RssMainWidget ui;
 
+	private slots:
+		void newFeed();
+
+	public slots:
+		void insertNewFeed(const QString, const QString);
+
 };
 #endif

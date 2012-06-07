@@ -13,7 +13,7 @@ bool initDB() {
 	QStringList tables = db.tables();
 	if(tables.contains("feeds") && tables.contains("feedentries")) {
 		debug()<<"feed and feedentries tables allready exists";
-		return false;
+		return true;
 	}
 
 	QSqlQuery q;
