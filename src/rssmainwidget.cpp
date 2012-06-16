@@ -5,9 +5,12 @@
 
 RssMainWidget::RssMainWidget(QWidget* parent) : QWidget(parent) {
 	ui.setupUi(this);
-	QObject::connect(ui.newFeedButton, SIGNAL(clicked()), this, SLOT(newFeed()));
-	QObject::connect(ui.removeFeedButton, SIGNAL(clicked()), this, SLOT(onRemoveClick()));
-	QObject::connect(ui.getFeedsButton, SIGNAL(clicked()), this, SLOT(getFeeds()));
+	QObject::connect(ui.newFeedButton, SIGNAL(clicked()), this, 
+		SLOT(newFeed()));
+	QObject::connect(ui.removeFeedButton, SIGNAL(clicked()), this, 
+		SLOT(onRemoveClick()));
+	QObject::connect(ui.getFeedsButton, SIGNAL(clicked()), this, 
+		SLOT(getFeeds()));
 	db = QSqlDatabase::addDatabase("QSQLITE");
 	db.setDatabaseName("rssmemory.sqlite");
 	db.open();
@@ -114,6 +117,7 @@ void RssMainWidget::getFeeds() {
 		debug()<<id<<url;
 	}
 	debug()<<q.lastError().text();
+	feedEntryModel->select();
 }
 
 void RssMainWidget::getFeed(const QString& url, const int feed) {
