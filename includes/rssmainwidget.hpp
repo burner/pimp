@@ -25,7 +25,7 @@ class RssMainWidget : public QWidget {
 		void onRemoveClick();
 		void getFeeds();
 		void selectFeedEntryChanged(QModelIndex, QModelIndex);
-		void selectFeedEntriesChanged(QModelIndex oldFeed, QModelIndex newFeed);
+		void selectFeedEntriesChanged(QModelIndex newFeed, QModelIndex oldFeed);
 
 	public slots:
 		void insertNewFeed(const QString, const QString);

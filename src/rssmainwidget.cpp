@@ -59,20 +59,27 @@ void RssMainWidget::init() {
 	}
 }
 
-void RssMainWidget::selectFeedEntriesChanged(QModelIndex oldFeed, QModelIndex
-		newFeed) {
+void RssMainWidget::selectFeedEntriesChanged(QModelIndex newFeed, QModelIndex
+		oldFeed) {
 	auto record = feedEntryModel->record(newFeed.row());
 	auto field = record.field(2);
 	debug()<<field.value().toString();
 	ui.feedDisplay->load(field.value().toString());
+	int readCnt = record.value("read").toInt() + 1;
+	record.setValue("read", readCnt);
+	feedEntryModel->setRecord(newFeed.row(), record);
+	feedEntryModel->submitAll();
 }
 
-void RssMainWidget::selectFeedEntryChanged(QModelIndex oldFeed, QModelIndex
-		newFeed) {
+void RssMainWidget::selectFeedEntryChanged(QModelIndex newFeed, QModelIndex
+		oldFeed) {
 	auto record = feedModel->record(newFeed.row());
-	auto field = record.field(0);
+	debug()<<newFeed.row()<<" "<<oldFeed.row();
+	auto field = record.field("id");
+	debug()<<field.value();
+	debug()<<record.field(1).value();
 	//debug()<<QString("feed == %1").arg(field.value().toInt());
-	feedEntryModel->setFilter(QString("feed == %1").
+	feedEntryModel->setFilter(QString("feed = %1").
 		arg(field.value().toInt()));
 	debug()<<feedEntryModel->filter();
 	if(!feedEntryModel->select()) {
@@ -114,14 +121,14 @@ bool RssMainWidget::initDB(QSqlDatabase& db) {
 
 	QSqlQuery q;
     if(!q.exec(QLatin1String(
-			"create table feeds(id integer primary key, name varchar, url varchar, unread integer)"))) {
+		"create table feeds(id integer primary key, name varchar, url varchar, unread integer)"))) {
 		critical()<<q.lastError().text();
 		return false;
 	}
 
     if(!q.exec(QLatin1String(
-			"create table feedentries(id integer primary key, title varchar, link varchar, ")
-			+ QLatin1String("pubData varchar, description varchar, read integer, feed integer)"))) {
+		"create table feedentries(id integer primary key, title varchar, link varchar, ")
+		+ QLatin1String("pubData varchar, description varchar, read integer, feed integer)"))) {
 		critical()<<q.lastError().text();
 		return false;
 	}
@@ -129,8 +136,9 @@ bool RssMainWidget::initDB(QSqlDatabase& db) {
 	return true;
 }
 
-bool RssMainWidget::addFeed(QSqlQuery& q, const QString& name, const QString& url) {
-	if (!q.prepare(QString("insert into feeds(name, url, unread) values(:name, :url, :count)"))) {
+bool RssMainWidget::addFeed(QSqlQuery& q, const QString& name, 
+		const QString& url) {
+	if(!q.prepare(QString("insert into feeds(name, url, unread) values(:name, :url, :count)"))) {
 		critical()<<q.lastError().text();
 		return false;
 	}

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(pim)
+project(pimp)
 
 find_package(Qt4 COMPONENTS QtCore QtGui QtWebkit REQUIRED)
 SET(QT_USE_QTSQL TRUE)
@@ -8,7 +8,7 @@ SET(QT_USE_QTWEBKIT TRUE)
 
 include(${QT_USE_FILE})
 
-set(pim_HEADERS 
+set(pimp_HEADERS 
 	includes/main.hpp
 	includes/calendarmainwidget.hpp
 	includes/instantmainwidget.hpp
@@ -24,7 +24,7 @@ set(pim_HEADERS
 	includes/newfeeddialog.hpp
 )
 
-set(pim_SOURCES 
+set(pimp_SOURCES 
 	src/main.cpp
 	src/calendarmainwidget.cpp
 	src/instantmainwidget.cpp
@@ -40,7 +40,7 @@ set(pim_SOURCES
 	src/newfeeddialog.cpp
 )
 
-set(pim_MOC_HEADERS 
+set(pimp_MOC_HEADERS 
 	includes/calendarmainwidget.hpp
 	includes/instantmainwidget.hpp
 	includes/ircmainwidget.hpp
@@ -54,7 +54,7 @@ set(pim_MOC_HEADERS
 	includes/newfeeddialog.hpp
 )
 
-set(pim_UIS 
+set(pimp_UIS 
 	ui/calendarmainwidget.ui
 	ui/instantmainwidget.ui
 	ui/ircmainwidget.ui
@@ -68,28 +68,28 @@ set(pim_UIS
 	ui/newfeeddialog.ui
 )
 
-set(pim_RESOURCES
+set(pimp_RESOURCES
 	resources/icons.qrc
 )
 
 set(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
 
-QT4_WRAP_CPP(pim_MOC ${pim_MOC_HEADERS})
-QT4_WRAP_UI(pim_UIS_H ${pim_UIS})
-QT4_ADD_RESOURCES(pim_RESOURCES_CPP ${pim_RESOURCES})
-#QT4_WRAP_CPP(pim_MOC_SOURCES ${pim_MOC_HEADERS})
+QT4_WRAP_CPP(pimp_MOC ${pimp_MOC_HEADERS})
+QT4_WRAP_UI(pimp_UIS_H ${pimp_UIS})
+QT4_ADD_RESOURCES(pimp_RESOURCES_CPP ${pimp_RESOURCES})
+#QT4_WRAP_CPP(pimp_MOC_SOURCES ${pimp_MOC_HEADERS})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/includes)
 
-add_executable(pim
-    ${pim_SOURCES}
-	${pim_MOC_SOURCES}
-	${pim_MOC}
-    ${pim_UIS_H}
-	${pim_UIS}
-	${pim_UIS_H}
-	${pim_RESOURCES_CPP}
-	${pim_HEADERS}
+add_executable(pimp
+    ${pimp_SOURCES}
+	${pimp_MOC_SOURCES}
+	${pimp_MOC}
+    ${pimp_UIS_H}
+	${pimp_UIS}
+	${pimp_UIS_H}
+	${pimp_RESOURCES_CPP}
+	${pimp_HEADERS}
 )
 
-target_link_libraries(pim ${QT_LIBRARIES} mrss)
+target_link_libraries(pimp ${QT_LIBRARIES} mrss)
