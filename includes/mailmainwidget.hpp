@@ -12,5 +12,8 @@ class MailMainWidget : public QWidget {
 	private:
 		Ui::MailMainWidget ui;
 
+	private slots:
+		void newMail();
+
 };
 #endif

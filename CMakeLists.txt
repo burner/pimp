@@ -22,6 +22,7 @@ set(pimp_HEADERS
 	includes/contactsmainwidget.hpp
 	includes/debug.hpp
 	includes/newfeeddialog.hpp
+	includes/newmailwindow.hpp
 )
 
 set(pimp_SOURCES 
@@ -38,6 +39,7 @@ set(pimp_SOURCES
 	src/contactsmainwidget.cpp
 	src/debug.cpp
 	src/newfeeddialog.cpp
+	src/newmailwindow.cpp
 )
 
 set(pimp_MOC_HEADERS 
@@ -66,6 +68,8 @@ set(pimp_UIS
 	ui/contactsmainwidget.ui
 	ui/rssmainwidget.ui
 	ui/newfeeddialog.ui
+	ui/inserthtmldialog.ui
+	ui/newmailwindow.ui
 )
 
 set(pimp_RESOURCES
