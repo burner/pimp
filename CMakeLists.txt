@@ -5,6 +5,8 @@ project(pimp)
 find_package(Qt4 COMPONENTS QtCore QtGui QtWebkit REQUIRED)
 SET(QT_USE_QTSQL TRUE)
 SET(QT_USE_QTWEBKIT TRUE)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include(${QT_USE_FILE})
 
@@ -44,20 +46,21 @@ set(pimp_SOURCES
 	src/newmailwindow.cpp
 )
 
-set(pimp_MOC_HEADERS 
-	includes/calendarmainwidget.hpp
-	includes/instantmainwidget.hpp
-	includes/ircmainwidget.hpp
-	includes/mailmainwidget.hpp
-	includes/mainwindow.hpp
-	includes/summarymainwidget.hpp
-	includes/todomainwidget.hpp
-	includes/loggingmainwidget.hpp
-	includes/contactsmainwidget.hpp
-	includes/rssmainwidget.hpp
-	includes/newfeeddialog.hpp
-	includes/newmailwindow.hpp
-)
+
+#set(pimp_MOC_HEADERS 
+#	includes/calendarmainwidget.hpp
+#	includes/instantmainwidget.hpp
+#	includes/ircmainwidget.hpp
+#	includes/mailmainwidget.hpp
+#	includes/mainwindow.hpp
+#	includes/summarymainwidget.hpp
+#	includes/todomainwidget.hpp
+#	includes/loggingmainwidget.hpp
+#	includes/contactsmainwidget.hpp
+#	includes/rssmainwidget.hpp
+#	includes/newfeeddialog.hpp
+#	includes/newmailwindow.hpp
+#)
 
 set(pimp_UIS 
 	ui/calendarmainwidget.ui
@@ -80,7 +83,7 @@ set(pimp_RESOURCES
 
 set(CMAKE_CXX_FLAGS "-Wall -Werror -ggdb --std=c++0x -std=gnu++0x")
 
-QT4_WRAP_CPP(pimp_MOC ${pimp_MOC_HEADERS})
+#QT4_WRAP_CPP(pimp_MOC ${pimp_MOC_HEADERS})
 QT4_WRAP_UI(pimp_UIS_H ${pimp_UIS})
 QT4_ADD_RESOURCES(pimp_RESOURCES_CPP ${pimp_RESOURCES})
 #QT4_WRAP_CPP(pimp_MOC_SOURCES ${pimp_MOC_HEADERS})
@@ -89,11 +92,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/incl
 
 add_executable(pimp
     ${pimp_SOURCES}
-	${pimp_MOC_SOURCES}
-	${pimp_MOC}
     ${pimp_UIS_H}
-	${pimp_UIS}
-	${pimp_UIS_H}
 	${pimp_RESOURCES_CPP}
 	${pimp_HEADERS}
 )
