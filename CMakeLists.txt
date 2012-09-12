@@ -21,6 +21,7 @@ set(pimp_HEADERS
 	includes/loggingmainwidget.hpp
 	includes/contactsmainwidget.hpp
 	includes/debug.hpp
+	includes/exception.hpp
 	includes/newfeeddialog.hpp
 	includes/newmailwindow.hpp
 )
@@ -38,6 +39,7 @@ set(pimp_SOURCES
 	src/loggingmainwidget.cpp
 	src/contactsmainwidget.cpp
 	src/debug.cpp
+	src/exception.cpp
 	src/newfeeddialog.cpp
 	src/newmailwindow.cpp
 )
@@ -54,6 +56,7 @@ set(pimp_MOC_HEADERS
 	includes/contactsmainwidget.hpp
 	includes/rssmainwidget.hpp
 	includes/newfeeddialog.hpp
+	includes/newmailwindow.hpp
 )
 
 set(pimp_UIS 
@@ -68,7 +71,6 @@ set(pimp_UIS
 	ui/contactsmainwidget.ui
 	ui/rssmainwidget.ui
 	ui/newfeeddialog.ui
-	ui/inserthtmldialog.ui
 	ui/newmailwindow.ui
 )
 
@@ -96,4 +98,4 @@ add_executable(pimp
 	${pimp_HEADERS}
 )
 
-target_link_libraries(pimp ${QT_LIBRARIES} mrss)
+target_link_libraries(pimp ${QT_LIBRARIES} mrss boost_regex)

@@ -2,10 +2,10 @@
 #define NEWMAILWINDOW
 
 #include <QMainWindow>
-#include <QWidget>
 #include <ui_newmailwindow.h>
 
 class NewMailWindow : public QMainWindow {
+	Q_OBJECT
 	public:
 		NewMailWindow(QWidget* parent = NULL);
 
@@ -13,7 +13,7 @@ class NewMailWindow : public QMainWindow {
 		Ui::NewMailWindow ui;
 
 	private slots:
-		void sendClick();
+		void sendButtonClick();
 
 };
 #endif

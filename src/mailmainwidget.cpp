@@ -2,6 +2,7 @@
 #include <debug.hpp>
 #include <newmailwindow.hpp>
 #include <stdio.h>
+#include <mimetic/mimetic.h>
 
 MailMainWidget::MailMainWidget(QWidget* parent) : QWidget(parent) {
 	ui.setupUi(this);
