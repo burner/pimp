@@ -22,6 +22,7 @@ struct Log {
 	Log(const char* f, int l);
 
 	void operator()();
+	void operator()(std::string form);
 	void operator()(std::string form, ptype a);
 	void operator()(std::string form, ptype a, ptype b);
 	void operator()(std::string form, ptype a, ptype b, ptype c);

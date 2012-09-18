@@ -95,6 +95,15 @@ void Log::operator()() {
 	std::cout<<tmp<<std::endl;
 	qDebug()<<tmp.c_str();
 }
+void Log::operator()(std::string form) {
+	std::vector<ptype> arr = {shortenString(file),line};
+	form = std::string("%s:%d ") + form;
+	check(form, arr,file,line);
+	auto tmp = format(form, arr);
+	std::cout<<tmp<<std::endl;
+	qDebug()<<tmp.c_str();
+}
+
 void Log::operator()(std::string form, ptype a) {
 	std::vector<ptype> arr = {shortenString(file),line,a};
 	form = std::string("%s:%d ") + form;

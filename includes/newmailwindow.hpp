@@ -14,6 +14,6 @@ class NewMailWindow : public QMainWindow {
 
 	private slots:
 		void sendButtonClick();
-
+		void closeCheck();
 };
 #endif

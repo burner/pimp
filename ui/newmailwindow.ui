@@ -143,30 +143,143 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QToolButton" name="copyButton">
         <property name="text">
-         <string>&amp;Bold</string>
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/edit-copy.png</normaloff>../resources/images/edit-copy.png</iconset>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QToolButton" name="cutButton">
         <property name="text">
-         <string>&amp;Italic</string>
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/edit-cut.png</normaloff>../resources/images/edit-cut.png</iconset>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_8">
+       <widget class="QToolButton" name="pasteButton">
         <property name="text">
-         <string>&amp;Underline</string>
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/edit-paste.png</normaloff>../resources/images/edit-paste.png</iconset>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_9">
+       <widget class="QToolButton" name="addImageButton">
         <property name="text">
-         <string>&amp;Strikethrough</string>
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/image-x-generic.png</normaloff>../resources/images/image-x-generic.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="insertHtmlButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/insert-html.png</normaloff>../resources/images/insert-html.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="boldButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/format-text-bold.png</normaloff>../resources/images/format-text-bold.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="strikethroughButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/format-text-strikethrough.png</normaloff>../resources/images/format-text-strikethrough.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="italicButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/format-text-italic.png</normaloff>../resources/images/format-text-italic.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="underlineButton">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/format-text-underline.png</normaloff>../resources/images/format-text-underline.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="zoomInButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/list-add.png</normaloff>../resources/images/list-add.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="zoomSlider">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="zoomOutButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../resources/images/list-remove.png</normaloff>../resources/images/list-remove.png</iconset>
         </property>
        </widget>
       </item>
@@ -189,7 +302,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>18</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -220,10 +333,6 @@
   <tabstop>lineEdit_3</tabstop>
   <tabstop>webView</tabstop>
   <tabstop>pushButton_4</tabstop>
-  <tabstop>pushButton_6</tabstop>
-  <tabstop>pushButton_7</tabstop>
-  <tabstop>pushButton_8</tabstop>
-  <tabstop>pushButton_9</tabstop>
   <tabstop>pushButton_5</tabstop>
   <tabstop>sendButton</tabstop>
   <tabstop>pushButton</tabstop>
