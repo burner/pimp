@@ -24,6 +24,7 @@ set(pimp_HEADERS
 	includes/contactsmainwidget.hpp
 	includes/debug.hpp
 	includes/exception.hpp
+	includes/highlighter.hpp
 	includes/newfeeddialog.hpp
 	includes/newmailwindow.hpp
 )
@@ -42,6 +43,7 @@ set(pimp_SOURCES
 	src/contactsmainwidget.cpp
 	src/debug.cpp
 	src/exception.cpp
+	src/highlighter.cpp
 	src/newfeeddialog.cpp
 	src/newmailwindow.cpp
 )
@@ -49,6 +51,7 @@ set(pimp_SOURCES
 set(pimp_UIS 
 	ui/calendarmainwidget.ui
 	ui/instantmainwidget.ui
+	ui/inserthtmldialog.ui
 	ui/ircmainwidget.ui
 	ui/mailmainwidget.ui
 	ui/mainwindow.ui
