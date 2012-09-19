@@ -2,6 +2,7 @@
 #define NEWMAILWINDOW
 
 #include <QMainWindow>
+#include <highlighter.hpp>
 #include <ui_newmailwindow.h>
 
 class Ui_Dialog;
@@ -18,6 +19,8 @@ class NewMailWindow : public QMainWindow {
 		bool queryCommandState(const QString&);
 		QDialog *insertHtmlDialog;
 		Ui_Dialog *ui_dialog;
+		Highlighter *highlighter;
+		bool sourceDirty;
 
 	private slots:
 		void sendButtonClick();
@@ -50,5 +53,8 @@ class NewMailWindow : public QMainWindow {
 		void insertImage();
 		void createLink();
 		void insertHtml();
+		void adjustActions();
+    	void adjustSource();
+		void changeTab(int);
 };
 #endif

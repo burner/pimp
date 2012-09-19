@@ -7,6 +7,15 @@
 #include <debug.hpp>
 #include <highlighter.hpp>
 
+#define FOLLOW_ENABLE(a1, a2) a1->setEnabled(ui.webView->pageAction(a2)->isEnabled())
+#define FOLLOW_CHECK(a1, a2) a1->setChecked(ui.webView->pageAction(a2)->isChecked())
+
+#define FORWARD_ACTION(action1, action2) \
+    connect(action1, SIGNAL(clicked()), \
+            ui.webView->pageAction(action2), SLOT(trigger())); \
+    connect(ui.webView->pageAction(action2), \
+            SIGNAL(changed()), SLOT(adjustActions()));
+
 NewMailWindow::NewMailWindow(QWidget* parent) : QMainWindow(parent),
 		insertHtmlDialog(NULL), ui_dialog(0) {
 	ui.setupUi(this);
@@ -19,6 +28,20 @@ NewMailWindow::NewMailWindow(QWidget* parent) : QMainWindow(parent),
 	ui.zoomSlider->setPageStep(100);
 	ui.zoomSlider->setValue(100);
 
+    connect(ui.tabWidget, SIGNAL(currentChanged(int)), this,
+		SLOT(changeTab(int)));
+
+    highlighter = new Highlighter(ui.plainTextView->document());
+
+    FORWARD_ACTION(ui.undoButton, QWebPage::Undo);
+    FORWARD_ACTION(ui.redoButton, QWebPage::Redo);
+    FORWARD_ACTION(ui.cutButton, QWebPage::Cut);
+    FORWARD_ACTION(ui.copyButton, QWebPage::Copy);
+    FORWARD_ACTION(ui.pasteButton, QWebPage::Paste);
+    FORWARD_ACTION(ui.boldButton, QWebPage::ToggleBold);
+    FORWARD_ACTION(ui.italicButton, QWebPage::ToggleItalic);
+    FORWARD_ACTION(ui.underlineButton, QWebPage::ToggleUnderline);
+
 	QObject::connect(ui.sendButton, SIGNAL(clicked()), this, 
 		SLOT(sendButtonClick()));
 	QObject::connect(ui.action_Quit, SIGNAL(triggered()), this, 
@@ -29,6 +52,53 @@ NewMailWindow::NewMailWindow(QWidget* parent) : QMainWindow(parent),
 		SLOT(zoomIn()));
 	QObject::connect(ui.zoomSlider, SIGNAL(valueChanged(int)), 
 		SLOT(changeZoom(int)));
+
+    QObject::connect(ui.addImageButton, SIGNAL(clicked()), 
+		this, SLOT(insertImage()));
+    QObject::connect(ui.insertUrlButton, SIGNAL(clicked()), 
+		this, SLOT(createLink()));
+    QObject::connect(ui.insertHtmlButton, SIGNAL(clicked()), this,
+		SLOT(insertHtml()));
+
+    QObject::connect(ui.actionAdd_Paragraph, SIGNAL(triggered()), this,
+		SLOT(styleParagraph()));
+    QObject::connect(ui.actionAdd_Heading_1, SIGNAL(triggered()), this,
+		SLOT(styleHeading1()));
+    QObject::connect(ui.actionAdd_Heading_2, SIGNAL(triggered()), this,
+		SLOT(styleHeading2()));
+    QObject::connect(ui.actionAdd_Heading_3, SIGNAL(triggered()), this,
+		SLOT(styleHeading3()));
+    QObject::connect(ui.actionAdd_Heading_4, SIGNAL(triggered()), this,
+		SLOT(styleHeading4()));
+    QObject::connect(ui.actionAdd_Heading_5, SIGNAL(triggered()), this,
+		SLOT(styleHeading5()));
+    QObject::connect(ui.actionAdd_Heading_6, SIGNAL(triggered()), this,
+		SLOT(styleHeading6()));
+
+    QObject::connect(ui.webView->page(), SIGNAL(selectionChanged()), this, 
+		SLOT(adjustActions()));
+    QObject::connect(ui.webView->page(), SIGNAL(contentsChanged()), this,
+		SLOT(adjustSource()));
+
+
+    QObject::connect(ui.strikethroughButton, SIGNAL(clicked()), this,
+		SLOT(formatStrikeThrough()));
+    QObject::connect(ui.leftAlignButton, SIGNAL(clicked()), this,
+		SLOT(formatAlignLeft()));
+    QObject::connect(ui.centeredButton, SIGNAL(clicked()), this,
+		SLOT(formatAlignCenter()));
+    QObject::connect(ui.rightAlignButton, SIGNAL(clicked()), this,
+		SLOT(formatAlignRight()));
+    QObject::connect(ui.fillButton, SIGNAL(clicked()), this,
+		SLOT(formatAlignJustify()));
+    QObject::connect(ui.decreaseIndentButton, SIGNAL(clicked()), this,
+		SLOT(formatDecreaseIndent()));
+    QObject::connect(ui.increaseIndentButton, SIGNAL(clicked()), this,
+		SLOT(formatIncreaseIndent()));
+    QObject::connect(ui.numberedButton, SIGNAL(clicked()), this,
+		SLOT(formatNumberedList()));
+    QObject::connect(ui.bulletButton, SIGNAL(clicked()), this,
+		SLOT(formatBulletedList()));
 }
 
 
@@ -82,12 +152,14 @@ void NewMailWindow::changeZoom(int percent) {
 
 void NewMailWindow::execCommand(const QString &cmd) {
 	QWebFrame *frame = ui.webView->page()->mainFrame();
+	LOG("%s", cmd.toStdString());
 	QString js = QString("document.execCommand(\"%1\", false, null)").arg(cmd);
 	frame->evaluateJavaScript(js);
 }
 
 void NewMailWindow::execCommand(const QString &cmd, const QString &arg) {
 	QWebFrame *frame = ui.webView->page()->mainFrame();
+	LOG("%s %s", cmd.toStdString(), arg.toStdString());
 	QString js = QString("document.execCommand(\"%1\", false, \"%2\")").
 		arg(cmd).arg(arg);
 	frame->evaluateJavaScript(js);
@@ -309,4 +381,38 @@ void NewMailWindow::insertHtml() {
 	}
 
 	delete hilite;
+}
+
+void NewMailWindow::adjustActions() {
+    FOLLOW_ENABLE(ui.undoButton, QWebPage::Undo);
+    FOLLOW_ENABLE(ui.redoButton, QWebPage::Redo);
+    FOLLOW_ENABLE(ui.cutButton, QWebPage::Cut);
+    FOLLOW_ENABLE(ui.copyButton, QWebPage::Copy);
+    FOLLOW_ENABLE(ui.pasteButton, QWebPage::Paste);
+    FOLLOW_CHECK(ui.boldButton, QWebPage::ToggleBold);
+    FOLLOW_CHECK(ui.italicButton, QWebPage::ToggleItalic);
+    FOLLOW_CHECK(ui.underlineButton, QWebPage::ToggleUnderline);
+
+    ui.strikethroughButton->setChecked(
+		queryCommandState("strikeThrough"));
+    ui.numberedButton->setChecked(
+		queryCommandState("insertOrderedList"));
+    ui.bulletButton->setChecked(
+		queryCommandState("insertUnorderedList"));
+}
+
+void NewMailWindow::adjustSource() {
+    setWindowModified(true);
+    sourceDirty = true;
+
+    if (ui.tabWidget->currentIndex() == 1)
+        changeTab(1);
+}
+
+void NewMailWindow::changeTab(int index) {
+    if(sourceDirty && (index == 1)) {
+        QString content = ui.webView->page()->mainFrame()->toHtml();
+        ui.plainTextView->setPlainText(content);
+        sourceDirty = false;
+    }
 }
