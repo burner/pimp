@@ -27,12 +27,12 @@
 
 Highlighter::Highlighter(QTextDocument *document)
 		: QSyntaxHighlighter(document) {
-	m_colors[DocType]		= QColor(192, 192, 192);
-	m_colors[Entity]		 = QColor(128, 128, 128);
-	m_colors[Tag]			= QColor(136,  18, 128);
-	m_colors[Comment]		= QColor( 35, 110,  37);
-	m_colors[AttributeName]  = QColor(153,  69,   0);
-	m_colors[AttributeValue] = QColor( 36,  36, 170);
+	m_colors[DocType] = QColor(192, 192, 192);
+	m_colors[Entity] = QColor(128, 128, 128);
+	m_colors[Tag] = QColor(136, 18, 128);
+	m_colors[Comment] = QColor(35, 110,  37);
+	m_colors[AttributeName] = QColor(153, 69, 0);
+	m_colors[AttributeValue] = QColor(36, 36, 170);
 }
 
 void Highlighter::highlightBlock(const QString &text) {

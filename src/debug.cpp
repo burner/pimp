@@ -85,11 +85,17 @@ std::string shortenString(const std::string& str) {
 	}
 }
 
-Log::Log(const char* f, int l) : file(f) , line(l) {}
+Log::Log(const char* f, int l) : file(f) , line(l), warn(false) {}
+Log::Log(const char* f, int l, bool w) : file(f) , line(l), warn(w) {}
 
 void Log::operator()() {
 	std::vector<ptype> arr = {shortenString(file),line};
-	std::string form("%s:%d ");
+	std::string form;
+	if(warn) {
+		form = std::string("WARN %s:%d ");
+	} else {
+		form = std::string("%s:%d ");
+	}
 	check(form,arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -97,7 +103,11 @@ void Log::operator()() {
 }
 void Log::operator()(std::string form) {
 	std::vector<ptype> arr = {shortenString(file),line};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -106,7 +116,11 @@ void Log::operator()(std::string form) {
 
 void Log::operator()(std::string form, ptype a) {
 	std::vector<ptype> arr = {shortenString(file),line,a};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -115,7 +129,11 @@ void Log::operator()(std::string form, ptype a) {
 
 void Log::operator()(std::string form, ptype a, ptype b) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -124,7 +142,11 @@ void Log::operator()(std::string form, ptype a, ptype b) {
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -133,7 +155,11 @@ void Log::operator()(std::string form, ptype a, ptype b, ptype c) {
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -143,7 +169,11 @@ void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d) {
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -153,7 +183,11 @@ void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -163,7 +197,11 @@ void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f, ptype g) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f,g};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -173,7 +211,11 @@ void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f, ptype g, ptype h) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f,g,h};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
@@ -183,7 +225,11 @@ void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f, ptype g, ptype h, ptype i) {
 	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f,g,h,i};
-	form = std::string("%s:%d ") + form;
+	if(warn) {
+		form = std::string("WARN %s:%d ") + form;
+	} else {
+		form = std::string("%s:%d ") + form;
+	}
 	check(form, arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;

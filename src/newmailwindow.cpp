@@ -1,6 +1,8 @@
 #include <QtGui>
 #include <QtWebKit>
 
+#include <vmime/vmime.hpp>
+
 #include "ui_inserthtmldialog.h"
 
 #include <newmailwindow.hpp>
@@ -79,7 +81,6 @@ NewMailWindow::NewMailWindow(QWidget* parent) : QMainWindow(parent),
 		SLOT(adjustActions()));
     QObject::connect(ui.webView->page(), SIGNAL(contentsChanged()), this,
 		SLOT(adjustSource()));
-
 
     QObject::connect(ui.strikethroughButton, SIGNAL(clicked()), this,
 		SLOT(formatStrikeThrough()));

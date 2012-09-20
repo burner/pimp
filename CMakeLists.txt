@@ -85,4 +85,4 @@ add_executable(pimp
 	${pimp_HEADERS}
 )
 
-target_link_libraries(pimp ${QT_LIBRARIES} mrss boost_regex)
+target_link_libraries(pimp ${QT_LIBRARIES} mrss vmime boost_regex)

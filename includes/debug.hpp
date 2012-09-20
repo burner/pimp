@@ -18,8 +18,10 @@ std::string&, char*, std::string, const char*> ptype;
 struct Log {
 	const char* file;
 	int line;
+	bool warn;
 	public:
 	Log(const char* f, int l);
+	Log(const char* f, int l, bool w);
 
 	void operator()();
 	void operator()(std::string form);
@@ -47,8 +49,10 @@ void doLogging(std::string&);
 #ifndef RELEASE
 //#define LOG (__FILE__,__LINE__); std::cout<<LOGTMPSTRING<<std::endl; qDebug()<<QString(LOGTMPSTRING.c_str());
 #define LOG Log(__FILE__,__LINE__)
+#define WARN Log(__FILE__,__LINE__,true)
 #else
 #define LOG() ;
+#define WARN() ;
 #endif
 
 #define debug() qDebug()<<prettyPrintFileLineInfo(stripFileName(__FILE__),__LINE__)<<"]"
