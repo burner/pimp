@@ -22,4 +22,18 @@ T enforce(T value, const std::string& msg, const char* file = __FILE__, int
 		return value;
 	}
 }
+
+class UnknownMediaTypeException : public std::exception {
+	std::string s;
+	public:
+	UnknownMediaTypeException(std::string ss);
+	const char* what() const throw();
+};
+
+class OutOfBoundException : public std::exception {
+	std::string s;
+	public:
+	OutOfBoundException(std::string ss);
+	const char* what() const throw();
+};
 #endif

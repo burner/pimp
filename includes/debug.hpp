@@ -43,6 +43,7 @@ struct Log {
 
 const QString stripFileName(const char*);
 const QString prettyPrintFileLineInfo(const QString&, int line);
+std::string format(const std::string&, const std::vector<ptype>&);
 
 void doLogging(std::string&);
 

@@ -2,10 +2,12 @@
 #include <QtWebKit>
 
 #include <vmime/vmime.hpp>
+#include <vmime/mediaType.hpp>
 
 #include "ui_inserthtmldialog.h"
 
 #include <newmailwindow.hpp>
+#include <exception.hpp>
 #include <debug.hpp>
 #include <highlighter.hpp>
 
@@ -102,10 +104,101 @@ NewMailWindow::NewMailWindow(QWidget* parent) : QMainWindow(parent),
 		SLOT(formatBulletedList()));
 }
 
+/*vmime::mediaTypes getImageType(const QString& name) {
+	if(name.endsWith(".png", Qt::CaseInsensitive)) { TODO way does vmime not 
+		return vmime::mediaTypes::IMAGE_PNG;			know png?
+	} else if(name.endsWith(".jpeg", Qt::CaseInsensitive)) {
+		return vmime::mediaTypes::IMAGE_JPEG;
+	} else if(name.endsWith(".jpg", Qt::CaseInsensitive)) {
+		return vmime::mediaTypes::IMAGE_JPEG;
+	} else if(name.endsWith(".gif", Qt::CaseInsensitive)) {
+		return vmime::mediaTypes::IMAGE_GIF;
+	}
+	throw UnknownMediaTypeException(name.toStdString());
+	assert(false);
+}*/
 
 void NewMailWindow::sendButtonClick() {
 	debug()<<"Here";
 	LOG("%s", "here also");
+
+	try {
+		vmime::messageBuilder mb;
+
+		// Fill in some header fields and message body
+		mb.setSubject(vmime::text(ui.subject->text().toStdString()));
+		LOG("%s", ui.subject->text().toStdString());
+		mb.setExpeditor(vmime::mailbox("pimpmailtest@gmail.com"));
+
+		// recipiants
+		auto recipList = ui.receiver->text().split(",");
+		for(auto it : recipList) {
+			LOG("%s", it.toStdString());
+			mb.getRecipients().appendAddress(
+				vmime::create<vmime::mailbox>(it.trimmed().toStdString())
+			);
+		}
+
+		// images
+		auto fs	= vmime::platform::getHandler()->getFileSystemFactory();
+		for(auto it : imageList) {
+			auto imageFile = fs->create(fs->stringToPath(it.toStdString()));
+			auto imageCts = vmime::create<vmime::streamContentHandler>(
+				imageFile->getFileReader()->getInputStream(),
+				imageFile->getLength()
+			);
+			try {
+				// get the type, might not be known TODO crashes
+				//vmime::mediaTypes iType = getImageType(it);
+				mb.getTextPart().dynamicCast<vmime::htmlTextPart>()
+					-> addObject(imageCts, 
+					vmime::mediaType(vmime::mediaTypes::IMAGE, 
+						//getImageType(it)
+						vmime::mediaTypes::IMAGE
+					)
+				);
+			} catch(UnknownMediaTypeException& e) {
+				WARN("UnknwonMediaTypeException cought because of type %s",
+					e.what());
+				continue;
+			} 
+		}
+
+		// message
+		mb.constructTextPart(vmime::mediaType(vmime::mediaTypes::TEXT,
+			vmime::mediaTypes::TEXT_HTML));
+		mb.getTextPart()->setCharset(vmime::charsets::UTF_8);
+		mb.getTextPart()->setText(vmime::create<vmime::stringContentHandler>(
+			ui.webView->page()->mainFrame()->toHtml().toStdString()
+		));
+
+		// construct the message
+		auto msg = mb.construct();
+		std::string message = msg->generate();
+		LOG("the message \"%s\"", message);	
+		
+		// now lets send the stuff
+		auto theSession = vmime::create<vmime::net::session>();
+		theSession->getProperties()["auth.username"] = "pimptestmail";
+		theSession->getProperties()["auth.password"] = "pimptestmailpassword";
+		theSession->getProperties()["server.address"] = "googlemail.com";
+		theSession->getProperties()["server.port"] = "465";
+		theSession->getProperties().setProperty(
+			"options.need-authentication", true);
+
+		auto tr =
+theSession->getTransport(vmime::utility::url("smtp://smtp@googlemail.com"));
+		tr->connect();
+		tr->send(msg);
+
+	} catch(vmime::exception& e) {
+		WARN("vmime exception through \"%s\"", e.what());
+	} catch(std::exception& e) {
+		WARN("std exception through \"%s\"", e.what());
+	} catch(...) {
+		WARN("exception through");
+	}
+
 }
 
 void NewMailWindow::closeCheck() {
@@ -300,11 +393,16 @@ void NewMailWindow::insertImage() {
 
 	QString fn = QFileDialog::getOpenFileName(this, tr("Open image..."),
 				 QString(), filters);
+
+	imageList.append(fn);
+
 	if(fn.isEmpty()) {
+		LOG("empty file name");
 		return;
 	}
 
 	if(!QFile::exists(fn)) {
+		LOG("file does not exists");
 		return;
 	}
 

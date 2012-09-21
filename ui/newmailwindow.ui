@@ -80,12 +80,12 @@
            <string>From</string>
           </property>
           <property name="buddy">
-           <cstring>comboBox</cstring>
+           <cstring>fromSelect</cstring>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="comboBox"/>
+         <widget class="QComboBox" name="fromSelect"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_2">
@@ -93,12 +93,12 @@
            <string>To</string>
           </property>
           <property name="buddy">
-           <cstring>lineEdit</cstring>
+           <cstring>receiver</cstring>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="receiver"/>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_3">
@@ -106,22 +106,25 @@
            <string>Bcc</string>
           </property>
           <property name="buddy">
-           <cstring>lineEdit_2</cstring>
+           <cstring>bcc</cstring>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="bcc"/>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
            <string>Subject</string>
           </property>
+          <property name="buddy">
+           <cstring>subject</cstring>
+          </property>
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="subject"/>
         </item>
         <item row="3" column="0">
          <spacer name="verticalSpacer_2">
@@ -564,12 +567,11 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>comboBox</tabstop>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>lineEdit_2</tabstop>
+  <tabstop>fromSelect</tabstop>
+  <tabstop>receiver</tabstop>
+  <tabstop>bcc</tabstop>
+  <tabstop>subject</tabstop>
   <tabstop>webView</tabstop>
-  <tabstop>pushButton_5</tabstop>
-  <tabstop>pushButton</tabstop>
   <tabstop>pushButton_4</tabstop>
   <tabstop>pushButton_3</tabstop>
   <tabstop>copyButton</tabstop>
@@ -579,7 +581,7 @@
   <tabstop>insertUrlButton</tabstop>
   <tabstop>insertHtmlButton</tabstop>
   <tabstop>boldButton</tabstop>
-  <tabstop>lineEdit_3</tabstop>
+  <tabstop>pushButton_5</tabstop>
   <tabstop>strikethroughButton</tabstop>
   <tabstop>italicButton</tabstop>
   <tabstop>underlineButton</tabstop>
@@ -587,6 +589,7 @@
   <tabstop>increaseIndentButton</tabstop>
   <tabstop>fillButton</tabstop>
   <tabstop>centeredButton</tabstop>
+  <tabstop>pushButton</tabstop>
   <tabstop>leftAlignButton</tabstop>
   <tabstop>rightAlignButton</tabstop>
   <tabstop>numberedButton</tabstop>
@@ -595,6 +598,10 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>sendButton</tabstop>
   <tabstop>plainTextView</tabstop>
+  <tabstop>undoButton</tabstop>
+  <tabstop>redoButton</tabstop>
+  <tabstop>zoomOutButton</tabstop>
+  <tabstop>zoomInButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

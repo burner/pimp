@@ -11,41 +11,45 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include(${QT_USE_FILE})
 
 set(pimp_HEADERS 
-	includes/main.hpp
+	includes/aes256.hpp
 	includes/calendarmainwidget.hpp
-	includes/instantmainwidget.hpp
-	includes/rssmainwidget.hpp
-	includes/ircmainwidget.hpp
-	includes/mailmainwidget.hpp
-	includes/mainwindow.hpp
-	includes/summarymainwidget.hpp
-	includes/todomainwidget.hpp
-	includes/loggingmainwidget.hpp
 	includes/contactsmainwidget.hpp
 	includes/debug.hpp
 	includes/exception.hpp
 	includes/highlighter.hpp
+	includes/instantmainwidget.hpp
+	includes/ircmainwidget.hpp
+	includes/loggingmainwidget.hpp
+	includes/mailmainwidget.hpp
+	includes/main.hpp
+	includes/mainwindow.hpp
 	includes/newfeeddialog.hpp
 	includes/newmailwindow.hpp
+	includes/rssmainwidget.hpp
+	includes/settings.hpp
+	includes/summarymainwidget.hpp
+	includes/todomainwidget.hpp
 )
 
 set(pimp_SOURCES 
-	src/main.cpp
+	src/aes256.cpp
 	src/calendarmainwidget.cpp
-	src/instantmainwidget.cpp
-	src/rssmainwidget.cpp
-	src/ircmainwidget.cpp
-	src/mailmainwidget.cpp
-	src/mainwindow.cpp
-	src/summarymainwidget.cpp
-	src/todomainwidget.cpp
-	src/loggingmainwidget.cpp
 	src/contactsmainwidget.cpp
 	src/debug.cpp
 	src/exception.cpp
 	src/highlighter.cpp
+	src/instantmainwidget.cpp
+	src/ircmainwidget.cpp
+	src/loggingmainwidget.cpp
+	src/mailmainwidget.cpp
+	src/main.cpp
+	src/mainwindow.cpp
 	src/newfeeddialog.cpp
 	src/newmailwindow.cpp
+	src/rssmainwidget.cpp
+	src/settings.cpp
+	src/summarymainwidget.cpp
+	src/todomainwidget.cpp
 )
 
 set(pimp_UIS 
@@ -85,4 +89,4 @@ add_executable(pimp
 	${pimp_HEADERS}
 )
 
-target_link_libraries(pimp ${QT_LIBRARIES} mrss vmime boost_regex)
+target_link_libraries(pimp ${QT_LIBRARIES} mrss vmime boost_regex crypto)

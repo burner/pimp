@@ -22,6 +22,8 @@ class NewMailWindow : public QMainWindow {
 		Highlighter *highlighter;
 		bool sourceDirty;
 
+		QStringList imageList;
+
 	private slots:
 		void sendButtonClick();
 		void closeCheck();
