@@ -14,6 +14,7 @@ class MainWindow : public QMainWindow {
 
 	private slots:
 		void getAll();
+		void configDialog();
 
 };
 #endif

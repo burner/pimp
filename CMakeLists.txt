@@ -27,6 +27,7 @@ set(pimp_HEADERS
 	includes/newmailwindow.hpp
 	includes/rssmainwidget.hpp
 	includes/settings.hpp
+	includes/settingsdialog.hpp
 	includes/summarymainwidget.hpp
 	includes/todomainwidget.hpp
 )
@@ -48,6 +49,7 @@ set(pimp_SOURCES
 	src/newmailwindow.cpp
 	src/rssmainwidget.cpp
 	src/settings.cpp
+	src/settingsdialog.cpp
 	src/summarymainwidget.cpp
 	src/todomainwidget.cpp
 )
@@ -66,6 +68,7 @@ set(pimp_UIS
 	ui/rssmainwidget.ui
 	ui/newfeeddialog.ui
 	ui/newmailwindow.ui
+	ui/config.ui
 )
 
 set(pimp_RESOURCES

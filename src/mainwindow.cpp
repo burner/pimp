@@ -10,6 +10,7 @@
 #include <rssmainwidget.hpp>
 #include <summarymainwidget.hpp>
 #include <todomainwidget.hpp>
+#include <settingsdialog.hpp>
 
 #include <QIcon>
 
@@ -17,6 +18,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 	ui.setupUi(this);
 	QObject::connect(ui.actionGetAll, SIGNAL(triggered()),
 		this, SLOT(getAll()));
+	QObject::connect(ui.action_Settings, SIGNAL(triggered()),
+		this, SLOT(configDialog()));
 
 	// add tab widgets
 	auto logger = new LoggingMainWidget(this);
@@ -42,4 +45,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 void MainWindow::getAll() {
 	debug()<<"getAll stub";
 	return;
+}
+
+void MainWindow::configDialog() {
+	auto sd = new SettingsDialog(this);	
+	sd->showConditional();
 }

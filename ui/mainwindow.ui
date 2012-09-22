@@ -49,7 +49,14 @@
     <addaction name="actionGetAll"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>&amp;Settings</string>
+    </property>
+    <addaction name="action_Settings"/>
+   </widget>
    <addaction name="menuMenu"/>
+   <addaction name="menuSettings"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
@@ -63,6 +70,11 @@
   <action name="actionGetAll">
    <property name="text">
     <string>&amp;Get All</string>
+   </property>
+  </action>
+  <action name="action_Settings">
+   <property name="text">
+    <string>&amp;Settings</string>
    </property>
   </action>
  </widget>

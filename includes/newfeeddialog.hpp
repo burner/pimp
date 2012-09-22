@@ -1,5 +1,5 @@
-#ifndef NEWFEEDWIDGET
-#define NEWFEEDWIDGET
+#ifndef NEWFEEDDIALOG
+#define NEWFEEDDIALOG
 
 #include <QDialog>
 #include <QWidget>
@@ -19,6 +19,5 @@ class NewFeedDialog : public QDialog {
 
 	signals:
 		void createNewFeed(const QString,const QString);
-
 };
 #endif
