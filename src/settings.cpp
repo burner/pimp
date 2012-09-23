@@ -12,6 +12,7 @@ Settings* Settings::instance() {
 };
 
 Settings::Settings() {
+	LOG();
 	this->readQSettingsFile();
 }
 
@@ -46,6 +47,7 @@ const EmailSettings Settings::emailInfo(std::string adr) {
 }
 
 void Settings::readEmailSettings(QSettings& settings) {
+	LOG();
 	unsigned size = settings.beginReadArray("emailSettings");
 	for(unsigned i = 0; i < size; i++) {
 		settings.setArrayIndex(i);

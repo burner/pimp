@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 	QApplication app(argc, argv);
 
 	// start pimp only once
-	QSharedMemory shared("62d60669-bb94-4a94-88bb-b964890a7e04");
+	/*QSharedMemory shared("62d60669-bb94-4a94-88bb-b964890a7e04");
     if(!shared.create(512, QSharedMemory::ReadWrite) ) {
          QMessageBox msgBox;
          msgBox.setText(QObject::tr(
@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
          msgBox.setIcon( QMessageBox::Critical );
          msgBox.exec();
          return 1;
-    }
+    }*/
 
 	vmime::platform::setHandler<vmime::platforms::posix::posixHandler>();
 	Settings::instance();
@@ -34,5 +34,7 @@ int main(int argc, char** argv) {
 	auto mainWindow = new MainWindow;
 	mainWindow->show();
 
-	return app.exec();
+	int rslt = app.exec();
+	//shared.detach();
+	return rslt;
 }

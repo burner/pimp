@@ -30,6 +30,8 @@ set(pimp_HEADERS
 	includes/settingsdialog.hpp
 	includes/summarymainwidget.hpp
 	includes/todomainwidget.hpp
+	includes/configmainwidget.hpp
+	includes/newmailaccount.hpp
 )
 
 set(pimp_SOURCES 
@@ -52,6 +54,8 @@ set(pimp_SOURCES
 	src/settingsdialog.cpp
 	src/summarymainwidget.cpp
 	src/todomainwidget.cpp
+	src/configmainwidget.cpp
+	src/newmailaccount.cpp
 )
 
 set(pimp_UIS 
@@ -69,6 +73,8 @@ set(pimp_UIS
 	ui/newfeeddialog.ui
 	ui/newmailwindow.ui
 	ui/config.ui
+	ui/configmainwidget.ui
+	ui/mailaccount.ui
 )
 
 set(pimp_RESOURCES
