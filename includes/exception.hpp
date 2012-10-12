@@ -14,7 +14,7 @@ class EnforceException : public std::exception {
 };
 
 template<typename T> 
-T enforce(T value, const std::string& msg, const char* file = __FILE__, int
+T enforce(T value, const std::string& msg, std::string file = __FILE__, int
 		line = __LINE__) {
 	if(!value) {
 		throw EnforceException((boost::format("%s:%d %s")%file%line%msg).str());
