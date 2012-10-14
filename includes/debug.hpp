@@ -52,6 +52,7 @@ const QString prettyPrintFileLineInfo(const QString&, int line);
 std::string format(const std::string&, const std::vector<ptype>&);
 
 void doLogging(std::string&);
+void print_trace(int);
 
 #ifndef RELEASE
 //#define LOG (__FILE__,__LINE__); std::cout<<LOGTMPSTRING<<std::endl; qDebug()<<QString(LOGTMPSTRING.c_str());
