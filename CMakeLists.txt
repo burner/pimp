@@ -98,4 +98,4 @@ add_executable(pimp
 	${pimp_HEADERS}
 )
 
-target_link_libraries(pimp ${QT_LIBRARIES} mrss vmime boost_regex crypto)
+target_link_libraries(pimp ${QT_LIBRARIES} mrss vmime boost_regex crypto gnutls gsasl)
