@@ -24,17 +24,18 @@
 #include <QtGui>
 #include <QtNetwork>
 
-#include <twitter/mainwindow.h>
+#include <twitter/tmainwindow.h>
 #include <twitter/twitterview.h>
 #include <twitter/twitter.h>
+#include <debug.hpp>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+TMainWindow::TMainWindow(QWidget *parent)
+    : QWidget(parent)
 {
     ui.setupUi(this);
-    connect(ui.action_Quit, SIGNAL(triggered()), qApp, SLOT(quit()));
-    connect(ui.actionAbout_TwitterView, SIGNAL(triggered()), this, SLOT(about()));
-    connect(ui.actionAbout_Qt, SIGNAL(triggered()), this, SLOT(aboutQt()));
+    //connect(ui.action_Quit, SIGNAL(triggered()), qApp, SLOT(quit()));
+    //connect(ui.actionAbout_TwitterView, SIGNAL(triggered()), this, SLOT(about()));
+    //connect(ui.actionAbout_Qt, SIGNAL(triggered()), this, SLOT(aboutQt()));
     connect(ui.loginButton, SIGNAL(clicked()), this, SLOT(login()));
 
     m_movie = new QMovie(this);
@@ -46,43 +47,46 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_twitter, SIGNAL(credentialsVerified(bool, QString)),
             this, SLOT(credentialsVerified(bool, QString)));
 
-    statusBar()->showMessage(tr("Ready."));
+    //statusBar()->showMessage(tr("Ready."));
 }
 
-MainWindow::~MainWindow()
+TMainWindow::~TMainWindow()
 {
 }
 
-void MainWindow::login()
+void TMainWindow::login()
 {
+	// pimppim1337 , pimptwitterpassword
     ui.loginButton->setEnabled(false);
     ui.progressLabel->setText(QString());
     ui.progressLabel->setMovie(m_movie);
     m_twitter->setUserName(ui.userNameEdit->text());
     m_twitter->setPassword(ui.passwordEdit->text());
     m_twitter->verifyCredentials();
-    statusBar()->showMessage(tr("Logging in"));
+    //statusBar()->showMessage(tr("Logging in"));
 }
 
-void MainWindow::credentialsVerified(bool success, const QString &msg)
+void TMainWindow::credentialsVerified(bool success, const QString &msg)
 {
     if (success) {
-        statusBar()->showMessage(tr("Logged in"));
-        setCentralWidget(new TwitterView(m_twitter));
+        //statusBar()->showMessage(tr("Logged in"));
+        //setCentralWidget(new TwitterView(m_twitter));
+		LOG("succes");
     } else {
         ui.progressLabel->setText(tr("Login failed!"));
-        statusBar()->showMessage(tr("Login failed - %1").arg(msg));
+        //statusBar()->showMessage(tr("Login failed - %1").arg(msg));
         ui.loginButton->setEnabled(true);
+		LOG("failure");
     }
 }
 
-void MainWindow::about()
+void TMainWindow::about()
 {
     QMessageBox::about(this, tr("TwitterView Demo"),
                        tr("Demonstrates the use of QtXmlPatterns/XSLT with WebKit"));
 }
 
-void MainWindow::aboutQt()
+void TMainWindow::aboutQt()
 {
     QMessageBox::aboutQt(this);
 }

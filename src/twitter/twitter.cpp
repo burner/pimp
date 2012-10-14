@@ -27,6 +27,7 @@
 #include <QtXmlPatterns>
 
 #include <twitter/twitter.h>
+#include <debug.hpp>
 
 const QUrl Twitter::LOGIN_URL("http://twitter.com/account/verify_credentials.xml");
 const QUrl Twitter::GET_FRIENDS_URL("http://twitter.com/statuses/friends.xml");
@@ -71,6 +72,7 @@ void Twitter::setPassword(const QString &password)
 void Twitter::applyCredentials(QNetworkRequest *request)
 {
     QString userpass = QString("%1:%2").arg(m_userName).arg(m_password);
+	LOG("%s", userpass.toStdString());
     QByteArray auth("Basic " + userpass.toUtf8().toBase64());
     request->setRawHeader("Authorization", auth);
 }

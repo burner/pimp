@@ -128,7 +128,7 @@ void NewMailWindow::sendButtonClick() {
 		// Fill in some header fields and message body
 		mb.setSubject(vmime::text(ui.subject->text().toStdString()));
 		LOG("%s", ui.subject->text().toStdString());
-		mb.setExpeditor(vmime::mailbox("pimpmailtest@gmail.com"));
+		mb.setExpeditor(vmime::mailbox("pimp.1@gmx.de"));
 
 		// recipiants
 		auto recipList = ui.receiver->text().split(",");
@@ -179,9 +179,9 @@ void NewMailWindow::sendButtonClick() {
 		
 		// now lets send the stuff
 		auto theSession = vmime::create<vmime::net::session>();
-		theSession->getProperties()["auth.username"] = "pimptestmail";
+		theSession->getProperties()["auth.username"] = "pimp.1";
 		theSession->getProperties()["auth.password"] = "pimptestmailpassword";
-		theSession->getProperties()["server.address"] = "googlemail.com";
+		theSession->getProperties()["server.address"] = "gmx.de";
 		theSession->getProperties()["server.port"] = "465";
 		theSession->getProperties().setProperty(
 			"options.need-authentication", true);

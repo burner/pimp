@@ -35,7 +35,7 @@ set(pimp_HEADERS
 	includes/todomainwidget.hpp
 	includes/configmainwidget.hpp
 	includes/newmailaccount.hpp
-#	includes/twitter/mainwindow.h
+	includes/twitter/tmainwindow.h
 	includes/twitter/twitter.h
 	includes/twitter/twitterview.h
 )
@@ -63,7 +63,7 @@ set(pimp_SOURCES
 	src/configmainwidget.cpp
 	src/newmailaccount.cpp
 #src/twitter/main.cpp
-#	src/twitter/mainwindow.cpp
+	src/twitter/tmainwindow.cpp
 	src/twitter/twitter.cpp
 	src/twitter/twitterview.cpp
 )
@@ -85,7 +85,7 @@ set(pimp_UIS
 	ui/config.ui
 	ui/configmainwidget.ui
 	ui/mailaccount.ui
-#	ui/twittermain.ui
+	ui/twittermain.ui
 )
 
 set(pimp_RESOURCES

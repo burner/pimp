@@ -30,13 +30,13 @@
 
 class Twitter;
 
-class MainWindow : public QMainWindow
+class TMainWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    TMainWindow(QWidget *parent = 0);
+    ~TMainWindow();
 
 private slots:
     void about();

@@ -11,6 +11,7 @@
 #include <summarymainwidget.hpp>
 #include <todomainwidget.hpp>
 #include <settingsdialog.hpp>
+#include <twitter/tmainwindow.h>
 
 #include <QIcon>
 
@@ -33,6 +34,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 		tr("C&ontacts"));
 	ui.tabWidget->addTab(new InstantMainWidget(), QIcon(":/icons/hands"), 
 		tr("&Instant"));
+	ui.tabWidget->addTab(new TMainWindow(), QIcon(":/icons/smile"), 
+		tr("T&witter"));
 	ui.tabWidget->addTab(new IrcMainWidget(), QIcon(":/icons/trash"), 
 		tr("I&rc"));
 	auto rssWidget = new RssMainWidget(this);
