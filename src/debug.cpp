@@ -1,6 +1,9 @@
 #include <debug.hpp>
 #include <exception.hpp>
 #include <boost/regex.hpp>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 const QString stripFileName(const char* file) {
 	QString str(file);
@@ -22,8 +25,8 @@ std::string format(const std::string& form, const std::vector<ptype>& vec) {
 	return ret.str();
 }
 
-void check(const std::string& form, const std::vector<ptype>& vec, 
-		const char* file = __FILE__, int line = __LINE__) {
+void Log::check(const std::string& form, const std::vector<ptype>& vec, 
+		std::string file , int line) {
 	boost::regex re("%[0-9.#-+*]*[csdioxXufFeEaAgGp]");
 	auto it = boost::sregex_iterator(form.begin(), form.end(), re);
 	auto end = boost::sregex_iterator();
@@ -88,150 +91,105 @@ std::string shortenString(const std::string& str) {
 Log::Log(const char* f, int l) : file(f) , line(l), warn(false) {}
 Log::Log(const char* f, int l, bool w) : file(f) , line(l), warn(w) {}
 
-void Log::operator()() {
-	std::vector<ptype> arr = {shortenString(file),line};
-	std::string form;
+void Log::write(std::string form, const std::vector<ptype>& arr,
+		std::string& file, int line) {
 	if(warn) {
-		form = std::string("WARN %s:%d ");
+		form = std::string("WARN %s:%d ") + form;
 	} else {
-		form = std::string("%s:%d ");
+		form = std::string("%s:%d ") + form;
 	}
 	check(form,arr,file,line);
 	auto tmp = format(form, arr);
 	std::cout<<tmp<<std::endl;
 	qDebug()<<tmp.c_str();
 }
+
+void Log::operator()() {
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line};
+	write("", arr, f, line);
+}
+
 void Log::operator()(std::string form) {
-	std::vector<ptype> arr = {shortenString(file),line};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line};
+	write(form, arr, f, line);
 }
 
 void Log::operator()(std::string form, ptype a) {
-	std::vector<ptype> arr = {shortenString(file),line,a};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line,a};
+	write(form, arr, f, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b};
+	write(form, arr, f, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c};
+	write(form, arr, f, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c,d};
+	write(form, arr, f, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string f = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c,d,e};
+	write(form, arr, f, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string fi = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c,d,e,f};
+	write(form, arr, fi, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f, ptype g) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f,g};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string fi = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c,d,e,f,g};
+	write(form, arr, fi, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f, ptype g, ptype h) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f,g,h};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string fi = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c,d,e,f,g,h};
+	write(form, arr, fi, line);
 }
 
 void Log::operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
 		ptype e, ptype f, ptype g, ptype h, ptype i) {
-	std::vector<ptype> arr = {shortenString(file),line,a,b,c,d,e,f,g,h,i};
-	if(warn) {
-		form = std::string("WARN %s:%d ") + form;
-	} else {
-		form = std::string("%s:%d ") + form;
-	}
-	check(form, arr,file,line);
-	auto tmp = format(form, arr);
-	std::cout<<tmp<<std::endl;
-	qDebug()<<tmp.c_str();
+	std::string fi = shortenString(file);
+	std::vector<ptype> arr = {f,line,a,b,c,d,e,f,g,h,i};
+	write(form, arr, fi, line);
+}
+
+void print_trace(int) {
+    char pid_buf[30];
+    sprintf(pid_buf, "%d", getpid());
+    char name_buf[512];
+    name_buf[readlink("/proc/self/exe", name_buf, 511)]=0;
+    int child_pid = fork();
+    if (!child_pid) {           
+        dup2(2,1); // redirect output to stderr
+        fprintf(stdout,"stack trace for %s pid=%s\n",name_buf,pid_buf);
+        execlp("gdb", "gdb", "--batch", "-n", "-ex", "thread", "-ex", "bt", 
+			name_buf, pid_buf, NULL);
+        abort(); /* If gdb failed to start */
+		exit(1);
+    } else {
+        waitpid(child_pid,NULL,0);
+		exit(1);
+    }
 }

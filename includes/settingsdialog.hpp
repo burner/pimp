@@ -24,7 +24,6 @@ class SettingsDialog : public QDialog {
 		QTreeWidgetItem* rssTopItem;
 		QTreeWidgetItem* todoTopItem;
 
-
 	private slots:
 		void onResetClick();
 		void onExitClick();
@@ -32,6 +31,7 @@ class SettingsDialog : public QDialog {
 
 	public slots:
 		void setNewMailAccountWidget();
+		void loadEmailAccounts();
 
 };
 #endif

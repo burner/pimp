@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>410</width>
+    <width>500</width>
     <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
@@ -29,7 +29,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="emailAddressLine"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_2">
@@ -39,7 +39,7 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="usernameLine"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_3">
@@ -49,7 +49,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="passwordLine"/>
        </item>
       </layout>
      </item>
@@ -58,7 +58,7 @@
        <item>
         <layout class="QFormLayout" name="formLayout_3">
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_2"/>
+          <widget class="QComboBox" name="outgoingType"/>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_7">
@@ -82,10 +82,10 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_7"/>
+          <widget class="QLineEdit" name="outgoingUrl"/>
          </item>
          <item row="5" column="0">
-          <widget class="QCheckBox" name="checkBox_5">
+          <widget class="QCheckBox" name="outgoingSASL">
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
            </property>
@@ -95,7 +95,7 @@
           </widget>
          </item>
          <item row="6" column="0">
-          <widget class="QCheckBox" name="checkBox_6">
+          <widget class="QCheckBox" name="outgoingSASLFallback">
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
            </property>
@@ -105,7 +105,7 @@
           </widget>
          </item>
          <item row="7" column="0">
-          <widget class="QCheckBox" name="checkBox_7">
+          <widget class="QCheckBox" name="outgoingTLS">
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
            </property>
@@ -115,7 +115,7 @@
           </widget>
          </item>
          <item row="8" column="0">
-          <widget class="QCheckBox" name="checkBox_8">
+          <widget class="QCheckBox" name="outgoingTLSrequired">
            <property name="layoutDirection">
             <enum>Qt::RightToLeft</enum>
            </property>
@@ -132,7 +132,7 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEdit_8"/>
+          <widget class="QLineEdit" name="outgoingPort"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_13">
@@ -142,14 +142,18 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_9"/>
+          <widget class="QLineEdit" name="outgoingRootpath"/>
          </item>
         </layout>
        </item>
        <item>
         <layout class="QFormLayout" name="formLayout_2">
-         <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox"/>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Incomming</string>
+           </property>
+          </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_4">
@@ -158,12 +162,8 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Incomming</string>
-           </property>
-          </widget>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="incommingType"/>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_5">
@@ -173,47 +173,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEdit_4"/>
-         </item>
-         <item row="5" column="0">
-          <widget class="QCheckBox" name="checkBox">
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="text">
-            <string>SASL</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0">
-          <widget class="QCheckBox" name="checkBox_2">
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="text">
-            <string>SASL Fallback</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QCheckBox" name="checkBox_3">
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="text">
-            <string>TLS</string>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QCheckBox" name="checkBox_4">
-           <property name="layoutDirection">
-            <enum>Qt::RightToLeft</enum>
-           </property>
-           <property name="text">
-            <string>TLS required</string>
-           </property>
-          </widget>
+          <widget class="QLineEdit" name="incommingUrl"/>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_10">
@@ -223,7 +183,7 @@
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QLineEdit" name="lineEdit_5"/>
+          <widget class="QLineEdit" name="incommingPort"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_11">
@@ -233,7 +193,47 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lineEdit_6"/>
+          <widget class="QLineEdit" name="incommingRootpath"/>
+         </item>
+         <item row="5" column="0">
+          <widget class="QCheckBox" name="incommingSASL">
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>SASL</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="incommingSASLFallback">
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>SASL Fallback</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QCheckBox" name="incommingTLS">
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>TLS</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QCheckBox" name="incommingTLSrequired">
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>TLS required</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

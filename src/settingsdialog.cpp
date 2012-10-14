@@ -11,8 +11,8 @@ SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent) {
 	ui.setupUi(this);
 	activeWidget = new ConfigMainWidget(this);
 	ui.rightLayout->insertWidget(0, activeWidget);
-	QObject::connect(ui.acceptButton, SIGNAL(clicked()), activeWidget, 
-		SLOT(write()));
+	QObject::connect(ui.acceptButton, SIGNAL(clicked()), this, 
+		SLOT(loadEmailAccounts()));
 	QObject::connect(ui.resetButton, SIGNAL(clicked()), this, 
 		SLOT(onResetClick()));
 	QObject::connect(ui.exitButton, SIGNAL(clicked()), this, 
@@ -33,16 +33,23 @@ SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent) {
 	ui.treeWidget->addTopLevelItem(summaryTopItem);
 
 	ui.treeWidget->addTopLevelItem(emailTopItem);
-	for(auto it : Settings::emailAddress()) {
-		new QTreeWidgetItem(emailTopItem, QStringList(
-			QString::fromStdString(it))
-		);
-	}
+	this->loadEmailAccounts();
 
 	ui.treeWidget->addTopLevelItem(calendarTopItem);
 	ui.treeWidget->addTopLevelItem(contactTopItem);
 	ui.treeWidget->addTopLevelItem(todoTopItem);
 	
+}
+
+void SettingsDialog::loadEmailAccounts() {
+	LOG();
+	qDeleteAll(emailTopItem->takeChildren());
+	for(auto it : Settings::emailAddress()) {
+		LOG("%s", it);
+		new QTreeWidgetItem(emailTopItem, QStringList(
+			QString::fromStdString(it))
+		);
+	}
 }
 
 void SettingsDialog::showConditional() {

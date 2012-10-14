@@ -1,3 +1,4 @@
+#include <signal.h>
 #include <QApplication>
 #include <QDebug>
 #include <QSharedMemory>
@@ -6,10 +7,12 @@
 #include <vmime/vmime.hpp>
 #include <vmime/platforms/posix/posixHandler.hpp>
 
+#include <debug.hpp>
 #include <mainwindow.hpp>
 #include <settings.hpp>
 
 int main(int argc, char** argv) {
+	signal(SIGSEGV, print_trace);
 	QApplication app(argc, argv);
 
 	// start pimp only once

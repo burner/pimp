@@ -22,6 +22,12 @@ struct Log {
 	public:
 	Log(const char* f, int l);
 	Log(const char* f, int l, bool w);
+	static void check(const std::string& form, 
+		const std::vector<ptype>& vec, std::string file = __FILE__, 
+		int line = __LINE__);
+
+	void write(std::string, const std::vector<ptype>&, std::string&,
+		int);
 
 	void operator()();
 	void operator()(std::string form);
@@ -46,6 +52,7 @@ const QString prettyPrintFileLineInfo(const QString&, int line);
 std::string format(const std::string&, const std::vector<ptype>&);
 
 void doLogging(std::string&);
+void print_trace(int);
 
 #ifndef RELEASE
 //#define LOG (__FILE__,__LINE__); std::cout<<LOGTMPSTRING<<std::endl; qDebug()<<QString(LOGTMPSTRING.c_str());

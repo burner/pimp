@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(pimp)
 
-find_package(Qt4 COMPONENTS QtCore QtGui QtWebkit REQUIRED)
+find_package(Qt4 COMPONENTS QtCore QtNetwork QtXml QtXmlPatterns QtGui 
+		QtWebkit REQUIRED)
+SET(QT_USE_QNETWORK TRUE)
+SET(QT_USE_QTXML TRUE)
 SET(QT_USE_QTSQL TRUE)
 SET(QT_USE_QTWEBKIT TRUE)
 set(CMAKE_AUTOMOC ON)
@@ -32,6 +35,9 @@ set(pimp_HEADERS
 	includes/todomainwidget.hpp
 	includes/configmainwidget.hpp
 	includes/newmailaccount.hpp
+#	includes/twitter/mainwindow.h
+	includes/twitter/twitter.h
+	includes/twitter/twitterview.h
 )
 
 set(pimp_SOURCES 
@@ -56,6 +62,10 @@ set(pimp_SOURCES
 	src/todomainwidget.cpp
 	src/configmainwidget.cpp
 	src/newmailaccount.cpp
+#src/twitter/main.cpp
+#	src/twitter/mainwindow.cpp
+	src/twitter/twitter.cpp
+	src/twitter/twitterview.cpp
 )
 
 set(pimp_UIS 
@@ -75,10 +85,12 @@ set(pimp_UIS
 	ui/config.ui
 	ui/configmainwidget.ui
 	ui/mailaccount.ui
+#	ui/twittermain.ui
 )
 
 set(pimp_RESOURCES
 	resources/icons.qrc
+	resources/twitter.qrc
 	resources/htmleditor.qrc
 )
 

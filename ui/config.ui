@@ -6,18 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>464</width>
+    <width>529</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Config</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_3">
+  <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QTreeWidget" name="treeWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <attribute name="headerVisible">
         <bool>false</bool>
        </attribute>
@@ -31,7 +37,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="rightLayout">
+    <layout class="QVBoxLayout" name="rightLayout" stretch="0">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
