@@ -34,11 +34,17 @@ functionality like imap, smtp, and pop3. Maildir should be used for storage.
 of the google calendar should as well, maybe libgcal is needed as well. If
 more than one calendar lib is needed a simple abstraction should be
 implemented.
+* Notes: according to a caldav library: The only available one seems to be
+  libcaldav which does not seem to be activly developed any more. Other
+  choices is: a python library (zanshin)...
 
 ### Contacts:
 * Aim: Just another contact manager. This should provide an easy interface for
 the mail part to get addresses and such.
 * Implementation: Don't know yet.
+* Notes: It seems that there is no single carddav library yet, but
+  sogo/evolution have some code. Using WebDav and VCards seems to be an
+  alternative...
 
 ### Instant messenger:
 * Aim: Think pidgin.
