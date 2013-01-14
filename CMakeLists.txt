@@ -17,9 +17,9 @@ include(${QT_USE_FILE})
 set(LIBS ${LIBS} ${QT_LIBRARIES})
 
 ## we need a boost
-find_package( Boost 1.48 COMPONENTS regex REQUIRED )
-include_directories(${Boost_INCLUDE_DIRS})
-set(LIBS ${LIBS} ${Boost_LIBRARIES})
+#find_package( Boost 1.48 COMPONENTS regex REQUIRED )
+#include_directories(${Boost_INCLUDE_DIRS})
+#set(LIBS ${LIBS} ${Boost_LIBRARIES})
 
 ## this will do the imap,pop,smtp stuff
 find_package( VMime REQUIRED )
@@ -40,6 +40,8 @@ set(LIBS ${LIBS} ${OPENSSL_LIBRARIES})
 GET_DIRECTORY_PROPERTY(INCLUDES INCLUDE_DIRECTORIES)
 MESSAGE( "INCLUDES: ${INCLUDES}" )
 MESSAGE( "LIBS: ${LIBS}" )
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../sweet.hpp)
 
 ##############################################################################
 
@@ -73,7 +75,6 @@ set(pimp_SOURCES
 	src/aes256.cpp
 	src/calendarmainwidget.cpp
 	src/contactsmainwidget.cpp
-	src/debug.cpp
 	src/exception.cpp
 	src/highlighter.cpp
 	src/instantmainwidget.cpp

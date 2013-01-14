@@ -36,10 +36,10 @@ const EmailSettings Settings::emailInfo(std::string adr) {
 	if(it != ins->getEmailSettings().end()) {
 		return it->second;
 	} else {
-		std::vector<ptype> args = { adr };
+		//std::vector<ptype> args = { adr };
 		std::string msg = format(
 			"trying to access email settings for %s which is not present",
-			args);
+			adr);
 		WARN(msg);
 		throw OutOfBoundException(msg);
 	}

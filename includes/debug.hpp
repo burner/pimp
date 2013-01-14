@@ -2,50 +2,20 @@
 #define DEBUG
 
 #include <QDebug>
-#include <boost/format.hpp>
-#include <boost/variant.hpp>
 #include <iostream>
-#include <iterator>
-#include <string>
-#include <vector>
+#include "format.hpp"
 
-typedef boost::variant<
-bool, char,short,int,long,long long,
-unsigned char, unsigned short, unsigned int, unsigned long, 
-unsigned long long, float,double,long double,
-std::string&, char*, std::string, const char*> ptype; 
+static const QString prettyPrintFileLineInfo(const QString& file, int line) {
+	auto tmp = QString("%1:%2").arg(file, QString::number(line));
+	return tmp;
+}
 
-struct Log {
-	const char* file;
-	int line;
-	bool warn;
-	public:
-	Log(const char* f, int l);
-	Log(const char* f, int l, bool w);
-
-	void operator()();
-	void operator()(std::string form);
-	void operator()(std::string form, ptype a);
-	void operator()(std::string form, ptype a, ptype b);
-	void operator()(std::string form, ptype a, ptype b, ptype c);
-	void operator()(std::string form, ptype a, ptype b, ptype c, ptype d);
-	void operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
-			ptype e);
-	void operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
-			ptype e, ptype f);
-	void operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
-			ptype e, ptype f, ptype g);
-	void operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
-			ptype e, ptype f, ptype g, ptype h);
-	void operator()(std::string form, ptype a, ptype b, ptype c, ptype d,
-			ptype e, ptype f, ptype g, ptype h, ptype i);
-};
-
-const QString stripFileName(const char*);
-const QString prettyPrintFileLineInfo(const QString&, int line);
-std::string format(const std::string&, const std::vector<ptype>&);
-
-void doLogging(std::string&);
+static const QString stripFileName(const char* file) {
+	QString str(file);
+	int pos = str.lastIndexOf('/');
+	str.remove(0,pos+1);
+	return str;
+}
 
 #ifndef RELEASE
 //#define LOG (__FILE__,__LINE__); std::cout<<LOGTMPSTRING<<std::endl; qDebug()<<QString(LOGTMPSTRING.c_str());
@@ -61,4 +31,34 @@ void doLogging(std::string&);
 #define critical() qCritical()<<prettyPrintFileLineInfo(stripFileName(__FILE__),__LINE__)<<"]"
 #define fatal() qFatal()<<prettyPrintFileLineInfo(stripFileName(__FILE__),__LINE__)<<"]"
 
+static std::string shortenString(const std::string& str) {
+	size_t idx = str.rfind('/');
+	if(idx == std::string::npos) {
+		return str;
+	} else {
+		return str.substr(idx+1);
+	}
+}
+
+struct Log {
+	public:
+	Log(const char* f, int l, bool w = false) {
+		if(w) {
+			std::cerr<<"WARN ";
+		}
+		std::cerr<<shortenString(f)<<':'<<l<<' ';
+		debug()<<QString::fromStdString(shortenString(f))<<':'<<l<<' ';
+	}
+
+	void operator()() {
+		std::cerr<<std::endl;
+	}
+
+	template<typename... Args>
+	void operator()(std::string form, Args... args) {
+		auto tmp = format(form, args...);
+		std::cerr<<tmp<<std::endl;
+		debug()<<QString::fromStdString(tmp);
+	}
+};
 #endif

@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
     }*/
 
 	vmime::platform::setHandler<vmime::platforms::posix::posixHandler>();
-	Settings::instance();
 
 	// The setting stuff
 	QCoreApplication::setOrganizationName("PIMP_Foundation");
@@ -32,6 +31,7 @@ int main(int argc, char** argv) {
 	QCoreApplication::setApplicationName("PIMP");
 
 	auto mainWindow = new MainWindow;
+	Settings::instance();
 	mainWindow->show();
 
 	int rslt = app.exec();
