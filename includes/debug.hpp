@@ -18,7 +18,6 @@ static const QString stripFileName(const char* file) {
 }
 
 #ifndef RELEASE
-//#define LOG (__FILE__,__LINE__); std::cout<<LOGTMPSTRING<<std::endl; qDebug()<<QString(LOGTMPSTRING.c_str());
 #define LOG Log(__FILE__,__LINE__)
 #define WARN Log(__FILE__,__LINE__,true)
 #else
