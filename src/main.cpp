@@ -2,14 +2,19 @@
 #include <QDebug>
 #include <QSharedMemory>
 #include <QMessageBox>
+#include <QPlastiqueStyle>
+#include <QStyleFactory>
 #include <iostream>
+#include <stdlib.h>
 #include <vmime/vmime.hpp>
 #include <vmime/platforms/posix/posixHandler.hpp>
 
 #include <mainwindow.hpp>
 #include <settings.hpp>
+#include <debug.hpp>
 
 int main(int argc, char** argv) {
+	putenv(const_cast<char*>("QT_PLUGIN_PATH=/usr/lib/kde4/plugins:$QT_PLUGIN_PATH"));
 	QApplication app(argc, argv);
 
 	// start pimp only once
@@ -24,6 +29,12 @@ int main(int argc, char** argv) {
     }*/
 
 	vmime::platform::setHandler<vmime::platforms::posix::posixHandler>();
+
+	QStyle *style = QStyleFactory::create("oxygen");
+	if(style) {
+		LOG("Oxygen loaded!");        /// @note You can leave this out if you want!
+		QApplication::setStyle(style);
+	}
 
 	// The setting stuff
 	QCoreApplication::setOrganizationName("PIMP_Foundation");
