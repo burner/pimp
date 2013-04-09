@@ -176,13 +176,11 @@
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkBox" id="box3">
+                  <object class="GtkButton" id="button2">
+                    <property name="label" translatable="yes">button 2</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <placeholder/>
-                    </child>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -257,7 +255,7 @@
               <object class="GtkLabel" id="label3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">page 3</property>
+                <property name="label" translatable="yes">page 4</property>
               </object>
               <packing>
                 <property name="position">3</property>
