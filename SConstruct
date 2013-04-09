@@ -1,17 +1,19 @@
 import os
 from subprocess import call
 
-CPPFLAGS= ' `pkg-config gtkmm-3.0 --cflags` ' + "-Wall -ggdb -Iui --std=c++11"
+CPPFLAGS= "-Wall -ggdb -Iui --std=c++11"
 CPPPATH= ["ui", "include"]
-LINKFLAGS = ' `pkg-config gtkmm-3.0 --libs` ' + "--std=c++11 -ggdb"
+LINKFLAGS = "--std=c++11 -ggdb"
 
-# here comes the magic
+
+# here comes the magic ui files go here
 gladeHeader = Split("""
 	ui/g2cpp_mainwindow.glade.hpp
 """)
 
 gladeFiles = [ "ui/"+i[9:-4] for i in gladeHeader]
 
+# source files go here
 srcFiles = Split("""
 	src/main.cpp
 """)
@@ -19,5 +21,6 @@ srcFiles = Split("""
 env = Environment()
 gh = env.Command(gladeHeader, gladeFiles, "./g2cpp.py $SOURCE")
 env.Append(CPPFLAGS=CPPFLAGS, LINKFLAGS=LINKFLAGS, CPPPATH=CPPPATH)
+env.ParseConfig("pkg-config gtkmm-3.0 --cflags --libs")
 pimp = env.Program('pimp', srcFiles)
 Depends(srcFiles, gladeHeader)
