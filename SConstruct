@@ -16,6 +16,7 @@ gladeFiles = [ "ui/"+i[9:-4] for i in gladeHeader]
 # source files go here
 srcFiles = Split("""
 	src/main.cpp
+	src/mainwindow/mainwindow.cpp
 """)
 
 env = Environment()

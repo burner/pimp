@@ -1,11 +1,25 @@
+#include <fstream>
 #include <gtkmm.h>
 
-#include "g2cpp_mainwindow.glade.hpp"
+#include <mainwindow/mainwindow.hpp>
+
+// load whatever theme is found in the current folder
+static void loadOxygenTheme() {
+	std::ifstream gtkSymLink("gtk-3.0");
+	if(gtkSymLink) {
+		auto screen = Gdk::Screen::get_default();
+		auto css_provider = Gtk::CssProvider::create();
+		css_provider->load_from_path("gtk-3.0/gtk.css");
+		auto context = Gtk::StyleContext::create();
+		context->add_provider_for_screen(screen, css_provider, 800);
+	}
+}
 
 int main(int argc, char** argv) {
 	Gtk::Main kit(argc, argv);
-	mainwindow g;
-	Gtk::Window* w = g;
+	loadOxygenTheme();
+	MainWindow mw;
+	Gtk::Window* w = mw;
 	Gtk::Main::run(*w);
 	return 0;
 }
