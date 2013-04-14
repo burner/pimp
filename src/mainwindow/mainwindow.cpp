@@ -18,6 +18,8 @@ MainWindow::MainWindow() {
 	Gtk::Window * tWin = window1;
 	tWin->add_accel_group(startVimAccel);
 
+	tWin->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::spawnVimOnCurrent), false);
+
 	pimpCloseMenuItem->signal_activate().connect(sigc::ptr_fun(
 		&MainWindow::quitPimp
 	));
@@ -46,4 +48,15 @@ void MainWindow::quitPimp() {
 
 void MainWindow::termExit() {
 	LOG("args");
+}
+
+bool MainWindow::spawnVimOnCurrent(GdkEventKey* const& event) {
+	LOG("vim");
+	GdkModifierType modifiers= gtk_accelerator_get_default_mod_mask();
+	if(event->keyval == GDK_KEY_V && 
+			(event->state & modifiers) == GDK_CONTROL_MASK) {
+		LOG("Control-V was pressed");
+		return true;
+	}
+  	return false;
 }

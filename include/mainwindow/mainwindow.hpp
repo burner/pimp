@@ -10,5 +10,6 @@ public:
 	void termExit();
 private:
 	static void quitPimp();
+	bool spawnVimOnCurrent(GdkEventKey* const&);
 };
 #endif
