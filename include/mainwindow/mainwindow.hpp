@@ -7,8 +7,8 @@ class MainWindow : public mainwindow {
 public:
 	MainWindow();
 
+	void termExit();
 private:
 	static void quitPimp();
-	void termExit();
 };
 #endif

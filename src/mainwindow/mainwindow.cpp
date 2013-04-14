@@ -4,11 +4,20 @@
 
 #include <logger.hpp>
 
-static gint cb(GtkWidget *w, GdkEventAny *e, gpointer d) {
+#pragma GCC diagnostic ignored "-Wpmf-conversions"
+
+/*static gint cb(MainWindow *w) {
 	LOG("here");
-}
+	//auto wm = reinterpret_cast<MainWindow*>(w);
+	//wm->termExit();
+	return 0;
+}*/
 
 MainWindow::MainWindow() {
+	auto startVimAccel = Gtk::AccelGroup::create();
+	Gtk::Window * tWin = window1;
+	tWin->add_accel_group(startVimAccel);
+
 	pimpCloseMenuItem->signal_activate().connect(sigc::ptr_fun(
 		&MainWindow::quitPimp
 	));
@@ -27,7 +36,7 @@ MainWindow::MainWindow() {
 	Gtk::Widget* termW = Glib::wrap(term);
 	mailMainBox->pack_start(*termW);
 	termW->show();
-	g_signal_connect(term, "child_exited", G_CALLBACK(cb), this);
+	g_signal_connect(term, "child_exited", G_CALLBACK(reinterpret_cast<void(*)()>(&MainWindow::termExit)), this);
 }
 
 void MainWindow::quitPimp() {
@@ -36,5 +45,5 @@ void MainWindow::quitPimp() {
 }
 
 void MainWindow::termExit() {
-
+	LOG("args");
 }
