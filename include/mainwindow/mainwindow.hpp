@@ -9,5 +9,6 @@ public:
 
 private:
 	static void quitPimp();
+	void termExit();
 };
 #endif

@@ -1,7 +1,7 @@
 import os
 from subprocess import call
 
-CPPFLAGS= "-Wall -ggdb -Iui --std=c++11"
+CPPFLAGS= "-Wall -ggdb -Iui -I../sweet.hpp --std=c++11"
 CPPPATH= ["ui", "include"]
 LINKFLAGS = "--std=c++11 -ggdb"
 
@@ -22,6 +22,6 @@ srcFiles = Split("""
 env = Environment()
 gh = env.Command(gladeHeader, gladeFiles, "./g2cpp.py $SOURCE")
 env.Append(CPPFLAGS=CPPFLAGS, LINKFLAGS=LINKFLAGS, CPPPATH=CPPPATH)
-env.ParseConfig("pkg-config gtkmm-3.0 --cflags --libs")
+env.ParseConfig("pkg-config gtkmm-3.0 vte-2.90 --cflags --libs")
 pimp = env.Program('pimp', srcFiles)
 Depends(srcFiles, gladeHeader)
