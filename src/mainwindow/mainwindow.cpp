@@ -11,7 +11,9 @@ MainWindow::MainWindow() {
 	Gtk::Window * tWin = window1;
 	tWin->add_accel_group(startVimAccel);
 
-	tWin->signal_key_press_event().connect(sigc::mem_fun(this, &MainWindow::spawnVimOnCurrent), false);
+	tWin->signal_key_press_event().connect(sigc::mem_fun(
+		this, &MainWindow::spawnVimOnCurrent), false
+	);
 
 	pimpCloseMenuItem->signal_activate().connect(sigc::ptr_fun(
 		&MainWindow::quitPimp
@@ -31,7 +33,9 @@ MainWindow::MainWindow() {
 	Gtk::Widget* termW = Glib::wrap(term);
 	mailMainBox->pack_start(*termW);
 	termW->show();
-	g_signal_connect(term, "child_exited", G_CALLBACK(reinterpret_cast<void(*)()>(&MainWindow::termExit)), this);
+	g_signal_connect(term, "child_exited", G_CALLBACK(reinterpret_cast<void(*)()>(
+		&MainWindow::termExit)), this
+	);
 }
 
 void MainWindow::quitPimp() {
@@ -44,11 +48,9 @@ void MainWindow::termExit() {
 }
 
 bool MainWindow::spawnVimOnCurrent(GdkEventKey* const& event) {
-	GdkModifierType modifiers= gtk_accelerator_get_default_mod_mask();
-	if(event->keyval == GDK_KEY_V && 
-			(event->state & modifiers) == GDK_CONTROL_MASK) {
+	if(event->keyval == GDK_KEY_v && (event->state & GDK_CONTROL_MASK)) {
 		LOG("Control-V was pressed");
-		return true;
+		return false;
 	}
-  	return false;
+	return false;
 }
