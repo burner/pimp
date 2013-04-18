@@ -2,6 +2,8 @@
 #include <mainwindow/mainwindow.hpp>
 #include <vte/vte.h>
 
+#include <vimdialog/vimdialog.hpp>
+
 #include <logger.hpp>
 
 #pragma GCC diagnostic ignored "-Wpmf-conversions"
@@ -48,8 +50,14 @@ void MainWindow::termExit() {
 }
 
 bool MainWindow::spawnVimOnCurrent(GdkEventKey* const& event) {
-	if(event->keyval == GDK_KEY_v && (event->state & GDK_CONTROL_MASK)) {
-		LOG("Control-V was pressed");
+	if(event->keyval == GDK_KEY_m && (event->state & GDK_CONTROL_MASK)) {
+		LOG("Control-M was pressed");
+		Gtk::Widget* focus = window1->get_focus();
+		if(dynamic_cast<Gtk::TextView*>(focus) != nullptr) {
+			LOG("text view");
+		} else if(dynamic_cast<Gtk::Entry*>(focus) != nullptr) {
+			LOG("entry");
+		}
 		return false;
 	}
 	return false;
