@@ -6,17 +6,17 @@
     <property name="border_width">5</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="vimDialogBox">
+      <object class="GtkBox" id="vbox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="spacing">1</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog_action_area1">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="cancelButton">
-                <property name="label" translatable="yes">_Cancel</property>
+              <object class="GtkButton" id="closeButton">
+                <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -56,7 +56,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">cancelButton</action-widget>
+      <action-widget response="0">closeButton</action-widget>
       <action-widget response="0">okButton</action-widget>
     </action-widgets>
   </object>

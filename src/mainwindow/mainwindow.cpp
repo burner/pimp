@@ -38,6 +38,7 @@ MainWindow::MainWindow() {
 	g_signal_connect(term, "child_exited", G_CALLBACK(reinterpret_cast<void(*)()>(
 		&MainWindow::termExit)), this
 	);
+
 }
 
 void MainWindow::quitPimp() {
@@ -55,8 +56,12 @@ bool MainWindow::spawnVimOnCurrent(GdkEventKey* const& event) {
 		Gtk::Widget* focus = window1->get_focus();
 		if(dynamic_cast<Gtk::TextView*>(focus) != nullptr) {
 			LOG("text view");
+			VimDialog vd(dynamic_cast<Gtk::TextView*>(focus));
+			vd.show();
 		} else if(dynamic_cast<Gtk::Entry*>(focus) != nullptr) {
 			LOG("entry");
+			VimDialog vd(dynamic_cast<Gtk::Entry*>(focus));
+			vd.show();
 		}
 		return false;
 	}
