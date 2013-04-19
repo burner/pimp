@@ -3,6 +3,8 @@
 
 #include <mainwindow/mainwindow.hpp>
 
+#include <unit.hpp>
+
 // load whatever theme is found in the current folder
 static void loadOxygenTheme() {
 	std::ifstream gtkSymLink("gtk-3.0");
@@ -16,6 +18,7 @@ static void loadOxygenTheme() {
 }
 
 int main(int argc, char** argv) {
+	Unit::runTests();
 	Gtk::Main kit(argc, argv);
 	loadOxygenTheme();
 	MainWindow mw;

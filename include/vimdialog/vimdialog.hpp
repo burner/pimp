@@ -11,6 +11,7 @@ public:
 	void show();
 	void termExit();
 private:
+	std::string filename;
 	Gtk::Entry* entry;
 	Gtk::TextView* textView;
 	Gtk::Widget* termW;

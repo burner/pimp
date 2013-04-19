@@ -20,6 +20,7 @@ srcFiles = Split("""
 	src/main.cpp
 	src/mainwindow/mainwindow.cpp
 	src/vimdialog/vimdialog.cpp
+	src/uniquename.cpp
 """)
 
 env = Environment()

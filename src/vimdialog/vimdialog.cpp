@@ -1,8 +1,11 @@
+#include <sstream>
 #include <vte/vte.h>
 
-#include <vimdialog/vimdialog.hpp>
 #include <logger.hpp>
 #include <unit.hpp>
+
+#include <vimdialog/vimdialog.hpp>
+#include <uniquename.hpp>
 
 #pragma GCC diagnostic ignored "-Wpmf-conversions"
 
@@ -20,20 +23,23 @@ static void termExitCcallback(Gtk::Widget* w, gpointer Th) {
 }
 
 void VimDialog::buildVimTerm() {
+	// make a new name
+	this->filename = UniqueName::getName();
+
 	auto term = vte_terminal_new();
-	char* startterm[2] = {0,0};
+	char* startterm[3] = {0,0,0};
 	int pid;
-	startterm[0] = const_cast<char*>("vim");
+	std::string cmdStr("vim");
+	char* cTmp = const_cast<char*>(cmdStr.c_str());
+	startterm[0] = const_cast<char*>(cTmp);
+	startterm[1] = const_cast<char*>(this->filename.c_str());
+
 	vte_terminal_fork_command_full(VTE_TERMINAL(term), VTE_PTY_DEFAULT,
 		"~", &startterm[0], NULL, static_cast<GSpawnFlags>(
 			G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH
 		), NULL, NULL, &pid, NULL);
 
-	LOG("pid %d", pid);
-	LOG("%p", this);
-
 	termW = Glib::wrap(term);
-
 	vbox->pack_start(*termW);
 
 	g_signal_connect(term, "child_exited", G_CALLBACK(termExitCcallback), this);
@@ -45,13 +51,34 @@ void VimDialog::buildVimTerm() {
 }
 
 void VimDialog::termExit() {
-	LOG("%p", this);
+	LOG();
+	std::ifstream f(this->filename.c_str(), std::ios::in);
+	std::stringstream ss;
+
+	std::string line;
+	char endchar = entry ? ' ' : '\n';
+	while(getline(f, line)) {
+		ss<<line<<endchar;
+	}
+
+	std::string newText = ss.str();
+	newText.resize(newText.size()-1);
+	//LOG("\"%s\"", newText);
+	if(entry) {
+		entry->set_text(newText);
+		remove(this->filename.c_str());
+	} else if(textView) {
+		textView->get_buffer()->set_text(newText);
+		remove(this->filename.c_str());
+	} else {
+		WARN("entry and textview null");
+	}
+	
 	dialog1->hide();
 	_builder.clear();
 	delete this;
 }
 
 void VimDialog::show() {
-	LOG();
 	dialog1->show();
 }
