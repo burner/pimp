@@ -51,7 +51,6 @@ void VimDialog::buildVimTerm() {
 }
 
 void VimDialog::termExit() {
-	LOG();
 	std::ifstream f(this->filename.c_str(), std::ios::in);
 	std::stringstream ss;
 
@@ -63,7 +62,6 @@ void VimDialog::termExit() {
 
 	std::string newText = ss.str();
 	newText.resize(newText.size()-1);
-	//LOG("\"%s\"", newText);
 	if(entry) {
 		entry->set_text(newText);
 		remove(this->filename.c_str());
