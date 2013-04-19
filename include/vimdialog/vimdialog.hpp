@@ -9,9 +9,12 @@ public:
 	VimDialog(Gtk::TextView*);
 
 	void show();
+	void termExit();
 private:
 	Gtk::Entry* entry;
 	Gtk::TextView* textView;
+	Gtk::Widget* termW;
+	void buildVimTerm();
 };
 
 #endif

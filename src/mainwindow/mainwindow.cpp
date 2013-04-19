@@ -56,12 +56,12 @@ bool MainWindow::spawnVimOnCurrent(GdkEventKey* const& event) {
 		Gtk::Widget* focus = window1->get_focus();
 		if(dynamic_cast<Gtk::TextView*>(focus) != nullptr) {
 			LOG("text view");
-			VimDialog vd(dynamic_cast<Gtk::TextView*>(focus));
-			vd.show();
+			auto vd = new VimDialog(dynamic_cast<Gtk::TextView*>(focus));
+			vd->show();
 		} else if(dynamic_cast<Gtk::Entry*>(focus) != nullptr) {
 			LOG("entry");
-			VimDialog vd(dynamic_cast<Gtk::Entry*>(focus));
-			vd.show();
+			auto vd = new VimDialog(dynamic_cast<Gtk::Entry*>(focus));
+			vd->show();
 		}
 		return false;
 	}

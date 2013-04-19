@@ -8,5 +8,7 @@ tags:
 clean:
 	scons --clean
 
+new: clean build
+
 run: build
 	./pimp

@@ -1,12 +1,54 @@
+#include <vte/vte.h>
+
 #include <vimdialog/vimdialog.hpp>
 #include <logger.hpp>
+#include <unit.hpp>
+
+#pragma GCC diagnostic ignored "-Wpmf-conversions"
 
 VimDialog::VimDialog(Gtk::Entry* e) : entry(e), textView(nullptr) {
-	LOG();
+	buildVimTerm();
 }
 
 VimDialog::VimDialog(Gtk::TextView* t) : entry(nullptr), textView(t) {
-	LOG();
+	buildVimTerm();
+}
+
+static void termExitCcallback(Gtk::Widget* w, gpointer Th) {
+	VimDialog* This = reinterpret_cast<VimDialog*>(Th);
+	This->termExit();
+}
+
+void VimDialog::buildVimTerm() {
+	auto term = vte_terminal_new();
+	char* startterm[2] = {0,0};
+	int pid;
+	startterm[0] = const_cast<char*>("vim");
+	vte_terminal_fork_command_full(VTE_TERMINAL(term), VTE_PTY_DEFAULT,
+		"~", &startterm[0], NULL, static_cast<GSpawnFlags>(
+			G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH
+		), NULL, NULL, &pid, NULL);
+
+	LOG("pid %d", pid);
+	LOG("%p", this);
+
+	termW = Glib::wrap(term);
+
+	vbox->pack_start(*termW);
+
+	g_signal_connect(term, "child_exited", G_CALLBACK(termExitCcallback), this);
+
+	okButton->signal_clicked().connect(sigc::mem_fun(
+		this, &VimDialog::termExit
+	));
+	dialog1->show_all();
+}
+
+void VimDialog::termExit() {
+	LOG("%p", this);
+	dialog1->hide();
+	_builder.clear();
+	delete this;
 }
 
 void VimDialog::show() {
