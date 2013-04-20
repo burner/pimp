@@ -7,7 +7,6 @@ class MainWindow : public mainwindow {
 public:
 	MainWindow();
 
-	void termExit();
 private:
 	static void quitPimp();
 	bool spawnVimOnCurrent(GdkEventKey* const&);

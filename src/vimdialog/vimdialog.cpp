@@ -1,4 +1,5 @@
 #include <sstream>
+#include <fstream>
 #include <vte/vte.h>
 
 #include <logger.hpp>
@@ -26,8 +27,26 @@ void VimDialog::buildVimTerm() {
 	// make a new name
 	this->filename = UniqueName::getName();
 
+	// write the content of the entry or the textview to file
+	// so it is present in vim, because we don't want to retype
+	// anything
+	if(entry) {
+		std::ofstream file(this->filename.c_str(), std::ios::trunc);
+		file<<entry->get_text();
+	} else if(textView) {
+		std::ofstream file(this->filename.c_str(), std::ios::trunc);
+		file<<textView->get_buffer()->get_text();
+	} else {
+		WARN("entry and textview are null");
+	}
+
 	auto term = vte_terminal_new();
-	char* startterm[3] = {0,0,0};
+	GdkColor bgcolor;
+	bgcolor.red = 65535;
+	bgcolor.green = 65535;
+	bgcolor.blue = 65535;
+	vte_terminal_set_color_background(VTE_TERMINAL(term), &bgcolor);
+	char* startterm[4] = {0,0,0,0};
 	int pid;
 	std::string cmdStr("vim");
 	char* cTmp = const_cast<char*>(cmdStr.c_str());
@@ -61,7 +80,9 @@ void VimDialog::termExit() {
 	}
 
 	std::string newText = ss.str();
-	newText.resize(newText.size()-1);
+	if(!newText.empty()) {
+		newText.resize(newText.size()-1);
+	}
 	if(entry) {
 		entry->set_text(newText);
 		remove(this->filename.c_str());
