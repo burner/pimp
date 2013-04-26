@@ -12,6 +12,7 @@ VimDialog::VimDialog(QLineEdit* le) : textEdit(nullptr), lineEdit(le),
 		filename(QString::fromStdString(UniqueName::getName())) {}
 
 void VimDialog::run() {
+	this->writeOldToFile();
 	QProcess vim;
 	QStringList args;
 	args.push_back("-e");
@@ -22,7 +23,10 @@ void VimDialog::run() {
 	vim.start(termStr, args);
 	vim.waitForFinished(1000*60*60);
 	vim.kill();
-
+	this->readFileToWidget();
+	
+	// wonder if this is a good idea TODO
+	delete this;
 }
 
 void VimDialog::writeOldToFile() {
@@ -59,6 +63,4 @@ void VimDialog::readFileToWidget() {
 		WARN("entry and textview null");
 	}
 	remove(filename.toStdString().c_str());
-	
-	delete this;
 }
