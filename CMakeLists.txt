@@ -40,6 +40,7 @@ set(pimp_HEADERS
 	includes/mailwidget/mailmainwidget.hpp
 
 	includes/vimdialog/vimdialog.hpp
+	includes/vimdialog/uniquename.hpp
 
 	includes/main.hpp
 )
@@ -51,6 +52,7 @@ set(pimp_SOURCES
 	src/mailwidget/mailmainwidget.cpp
 
 	src/vimdialog/vimdialog.cpp
+	src/vimdialog/uniquename.cpp
 
 	src/main.cpp
 )
