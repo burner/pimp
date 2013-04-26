@@ -15,6 +15,9 @@ public:
 private:
 	QTextEdit* textEdit;
 	QLineEdit* lineEdit;
+	QString filename;
 
+	void writeOldToFile();
+	void readFileToWidget();
 };
 #endif
