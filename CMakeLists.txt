@@ -61,7 +61,7 @@ set(pimp_UIS
 
 	ui/mailwidget/mailmainwidget.ui
 
-	ui/vimdialog/vimdialog.ui
+#ui/vimdialog/vimdialog.ui
 )
 
 ## people love pictures
