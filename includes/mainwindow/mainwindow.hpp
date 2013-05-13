@@ -14,5 +14,6 @@ class MainWindow : public QMainWindow {
 
 	private:
 		void getAll();
+		void vimTest();
 };
 #endif

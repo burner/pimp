@@ -1,23 +1,32 @@
 #ifndef VIMDIALOG
 #define VIMDIALOG
 
-#include <QThread>
+#include <string>
+#include <QObject>
+#include <QSemaphore>
+#include <QProcess>
 #include <QLineEdit>
 #include <QTextEdit>
 
-class VimDialog : public QThread {
+class VimDialog : public QObject {
 Q_OBJECT
 public:
 	VimDialog(QTextEdit*);
 	VimDialog(QLineEdit*);
-	void run();
+	void process();
+
+public slots:
+	void readFileToWidget(int, QProcess::ExitStatus);
 
 private:
+	QProcess* vim;
 	QTextEdit* textEdit;
 	QLineEdit* lineEdit;
-	QString filename;
+	std::string filename;
+	QThread* threadToDel;
+	QSemaphore wait;
 
 	void writeOldToFile();
-	void readFileToWidget();
+	//void readFileToWidget();
 };
 #endif

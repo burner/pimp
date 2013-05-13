@@ -5,8 +5,10 @@
 #include <mainwindow/mainwindow.hpp>
 
 #include <logger.hpp>
+#include <unit.hpp>
 
 int main(int argc, char** argv) {
+	Unit::runTests();
 	QApplication app(argc, argv);
 	
 	// The setting stuff

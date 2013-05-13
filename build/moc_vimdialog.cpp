@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_VimDialog_t {
-    QByteArrayData data[1];
-    char stringdata[11];
+    QByteArrayData data[4];
+    char stringdata[50];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -29,9 +29,13 @@ struct qt_meta_stringdata_VimDialog_t {
     )
 static const qt_meta_stringdata_VimDialog_t qt_meta_stringdata_VimDialog = {
     {
-QT_MOC_LITERAL(0, 0, 9)
+QT_MOC_LITERAL(0, 0, 9),
+QT_MOC_LITERAL(1, 10, 16),
+QT_MOC_LITERAL(2, 27, 0),
+QT_MOC_LITERAL(3, 28, 20)
     },
-    "VimDialog\0"
+    "VimDialog\0readFileToWidget\0\0"
+    "QProcess::ExitStatus\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -41,26 +45,35 @@ static const uint qt_meta_data_VimDialog[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       1,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags
+       1,    2,   19,    2, 0x0a,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::Int, 0x80000000 | 3,    2,    2,
+
        0        // eod
 };
 
 void VimDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        VimDialog *_t = static_cast<VimDialog *>(_o);
+        switch (_id) {
+        case 0: _t->readFileToWidget((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< QProcess::ExitStatus(*)>(_a[2]))); break;
+        default: ;
+        }
+    }
 }
 
 const QMetaObject VimDialog::staticMetaObject = {
-    { &QThread::staticMetaObject, qt_meta_stringdata_VimDialog.data,
+    { &QObject::staticMetaObject, qt_meta_stringdata_VimDialog.data,
       qt_meta_data_VimDialog,  qt_static_metacall, 0, 0}
 };
 
@@ -75,14 +88,23 @@ void *VimDialog::qt_metacast(const char *_clname)
     if (!_clname) return 0;
     if (!strcmp(_clname, qt_meta_stringdata_VimDialog.stringdata))
         return static_cast<void*>(const_cast< VimDialog*>(this));
-    return QThread::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int VimDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QThread::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE

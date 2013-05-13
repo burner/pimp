@@ -1,15 +1,21 @@
 #include <QIcon>
+#include <QThread>
 
 #include <logger.hpp>
 
 #include <mainwindow/mainwindow.hpp>
 #include <mailwidget/mailmainwidget.hpp>
+#include <vimdialog/vimdialog.hpp>
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 	ui.setupUi(this);
 
 	connect(ui.actionGetAll, &QAction::triggered, 
 		this, &MainWindow::getAll
+	);
+
+	connect(ui.action_Settings, &QAction::triggered,
+		this, &MainWindow::vimTest
 	);
 
 	// add tab widgets
@@ -37,5 +43,19 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
 void MainWindow::getAll() {
 	LOG("getAll");
+	return;
+}
+
+void MainWindow::vimTest() {
+	LOG("vim test");
+	//QThread* t = new QThread;
+	VimDialog* vd = new VimDialog(new QLineEdit(this));
+	vd->process();
+	//vd->moveToThread(t);
+	//connect(t, &QThread::started, vd, &VimDialog::process);
+	//connect(vd, SIGNAL(finished()), t, SLOT(quit()));
+	//connect(vd, SIGNAL(finished()), vd, SLOT(deleteLater()));
+	//connect(t, SIGNAL(finished()), t, SLOT(deleteLater()));
+	//t->start();
 	return;
 }
