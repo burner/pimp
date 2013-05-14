@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 	connect(ui.action_Settings, &QAction::triggered,
 		this, &MainWindow::vimTest
 	);
+	connect(ui.action_VimEdit, &QAction::triggered,
+		this, &MainWindow::vimEdit
+	);
 
 	// add tab widgets
 	ui.tabWidget->addTab(new MailMainWidget(), QIcon(":/icons/letter"), 
@@ -43,6 +46,20 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
 void MainWindow::getAll() {
 	LOG("getAll");
+	return;
+}
+
+void MainWindow::vimEdit() {
+	LOG("vim test");
+	//QThread* t = new QThread;
+	VimDialog* vd = new VimDialog(new QLineEdit(this));
+	vd->process();
+	//vd->moveToThread(t);
+	//connect(t, &QThread::started, vd, &VimDialog::process);
+	//connect(vd, SIGNAL(finished()), t, SLOT(quit()));
+	//connect(vd, SIGNAL(finished()), vd, SLOT(deleteLater()));
+	//connect(t, SIGNAL(finished()), t, SLOT(deleteLater()));
+	//t->start();
 	return;
 }
 

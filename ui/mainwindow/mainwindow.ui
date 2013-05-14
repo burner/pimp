@@ -33,13 +33,14 @@
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>1141</width>
-     <height>19</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">
@@ -58,7 +59,6 @@
    <addaction name="menuMenu"/>
    <addaction name="menuSettings"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
    <property name="text">
     <string>&amp;Quit</string>
@@ -75,6 +75,14 @@
   <action name="action_Settings">
    <property name="text">
     <string>&amp;Settings</string>
+   </property>
+  </action>
+  <action name="action_VimEdit">
+   <property name="text">
+    <string>&amp;VimEdit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>
